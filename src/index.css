@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+@theme {
+  --color-oya-teal: #1e3a4d;
+  --color-oya-green: #2d8a4e;
+  --color-oya-amber: #f59e0b;
+  --color-oya-paper: #faf8f5;
+
+  --font-sans: "Nunito", "Poppins", sans-serif;
+}
+
+body {
+  background-color: var(--color-oya-paper);
+  background-image: radial-gradient(circle at 1px 1px, rgb(30 58 77 / 0.04) 1px, transparent 0);
+  background-size: 24px 24px;
+  color: var(--color-oya-teal);
+  font-family: var(--font-sans);
+}
+
+#root {
+  min-height: 100vh;
+}
