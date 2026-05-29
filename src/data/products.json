@@ -1,0 +1,22 @@
+[
+  {"id":"1","name":"Organic Bananas","price":1200,"category":"Fruits","unit":"bunch","image":"/images/product-placeholder.png","description":"Sweet ripe bananas, perfect for smoothies or snacking.","featured":true},
+  {"id":"2","name":"Honeycrisp Apples","price":3800,"category":"Fruits","unit":"kg","image":"/images/product-placeholder.png","description":"Crisp and juicy apples from local orchards.","featured":true},
+  {"id":"3","name":"Avocados","price":2500,"category":"Fruits","unit":"each","image":"/images/product-placeholder.png","description":"Creamy Hass avocados, ready for guacamole.","featured":false},
+  {"id":"4","name":"Baby Spinach","price":2200,"category":"Vegetables","unit":"bag","image":"/images/product-placeholder.png","description":"Pre-washed tender baby spinach leaves.","featured":true},
+  {"id":"5","name":"Roma Tomatoes","price":1800,"category":"Vegetables","unit":"kg","image":"/images/product-placeholder.png","description":"Firm tomatoes ideal for sauces and salads.","featured":false},
+  {"id":"6","name":"Broccoli Crowns","price":2000,"category":"Vegetables","unit":"each","image":"/images/product-placeholder.png","description":"Fresh green broccoli crowns.","featured":false},
+  {"id":"7","name":"Whole Milk","price":4500,"category":"Dairy","unit":"litre","image":"/images/product-placeholder.png","description":"Vitamin D whole milk from regional farms.","featured":true},
+  {"id":"8","name":"Free-Range Eggs","price":3200,"category":"Dairy","unit":"crate","image":"/images/product-placeholder.png","description":"Large brown eggs from pasture-raised hens.","featured":false},
+  {"id":"9","name":"Greek Yogurt","price":5500,"category":"Dairy","unit":"tub","image":"/images/product-placeholder.png","description":"Plain non-fat Greek yogurt, high protein.","featured":false},
+  {"id":"10","name":"Sourdough Loaf","price":5500,"category":"Bakery","unit":"loaf","image":"/images/product-placeholder.png","description":"Artisan sourdough baked fresh daily.","featured":true},
+  {"id":"11","name":"Whole Wheat Bread","price":2800,"category":"Bakery","unit":"loaf","image":"/images/product-placeholder.png","description":"Soft whole grain sandwich bread.","featured":false},
+  {"id":"12","name":"Chicken Breast","price":8500,"category":"Meat & Seafood","unit":"kg","image":"/images/product-placeholder.png","description":"Boneless skinless chicken breast.","featured":false},
+  {"id":"13","name":"Atlantic Salmon","price":12000,"category":"Meat & Seafood","unit":"kg","image":"/images/product-placeholder.png","description":"Fresh fillets, rich in omega-3.","featured":false},
+  {"id":"14","name":"Jasmine Rice","price":6500,"category":"Pantry","unit":"5 kg","image":"/images/product-placeholder.png","description":"Fragrant long-grain jasmine rice.","featured":false},
+  {"id":"15","name":"Extra Virgin Olive Oil","price":9800,"category":"Pantry","unit":"500 ml","image":"/images/product-placeholder.png","description":"Cold-pressed olive oil for cooking and dressings.","featured":false},
+  {"id":"16","name":"Orange Juice","price":4200,"category":"Beverages","unit":"1 litre","image":"/images/product-placeholder.png","description":"Not-from-concentrate pulp-free OJ.","featured":false},
+  {"id":"17","name":"Sparkling Water","price":5800,"category":"Beverages","unit":"12-pack","image":"/images/product-placeholder.png","description":"Lime-flavored sparkling water, zero calories.","featured":false},
+  {"id":"18","name":"Mixed Nuts","price":7500,"category":"Snacks","unit":"pack","image":"/images/product-placeholder.png","description":"Lightly salted roasted nut blend.","featured":false},
+  {"id":"19","name":"Frozen Berries","price":4800,"category":"Frozen","unit":"bag","image":"/images/product-placeholder.png","description":"Strawberries, blueberries, and raspberries blend.","featured":false},
+  {"id":"20","name":"Deal Bundle: Breakfast","price":18000,"category":"Deals","unit":"bundle","image":"/images/product-placeholder.png","description":"Eggs, bread, and OJ — save 15%.","featured":true}
+]
