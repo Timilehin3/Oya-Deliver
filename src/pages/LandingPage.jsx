@@ -1,24 +1,25 @@
-import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { FiSearch, FiArrowRight } from 'react-icons/fi';
-import ProductCard from '../components/ui/ProductCard';
-import ProductCardSkeleton from '../components/ui/ProductCardSkeleton';
-import categories from '../data/categories.json';
-import productsData from '../data/products.json';
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { FiSearch, FiArrowRight } from "react-icons/fi";
+import ProductCard from "../components/ui/ProductCard";
+import ProductCardSkeleton from "../components/ui/ProductCardSkeleton";
+import categories from "../data/categories.json";
+import productsData from "../data/products.json";
+import logoOnlyText from "../assets/oyadeliver_logo_onlytext.png";
 
 const FEATURED_CATEGORIES = categories.slice(0, 6);
 
 const categoryAccent = {
-  Fruits: 'border-l-oya-green',
-  Vegetables: 'border-l-green-600',
-  Dairy: 'border-l-blue-600',
-  Bakery: 'border-l-oya-amber',
-  'Meat & Seafood': 'border-l-rose-600',
-  Pantry: 'border-l-orange-600',
+  Fruits: "border-l-oya-green",
+  Vegetables: "border-l-green-600",
+  Dairy: "border-l-blue-600",
+  Bakery: "border-l-oya-amber",
+  "Meat & Seafood": "border-l-rose-600",
+  Pantry: "border-l-orange-600",
 };
 
 const LandingPage = () => {
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const [featured, setFeatured] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
@@ -35,7 +36,7 @@ const LandingPage = () => {
   const handleSearch = (e) => {
     e.preventDefault();
     const q = searchQuery.trim();
-    navigate(q ? `/products?search=${encodeURIComponent(q)}` : '/products');
+    navigate(q ? `/products?search=${encodeURIComponent(q)}` : "/products");
   };
 
   return (
@@ -49,16 +50,18 @@ const LandingPage = () => {
                 grocery delivery
               </p>
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-oya-teal leading-tight">
-                Fresh groceries{' '}
-                <span className="text-oya-green">delivered</span>{' '}
-                in minutes
+                Fresh groceries{" "}
+                <span className="text-oya-green">delivered</span> in minutes
               </h1>
               <p className="mt-4 text-lg text-oya-teal/70 max-w-md">
                 Shop local produce, pantry staples, and weekly deals — brought
                 straight to your door by Oya Deliver.
               </p>
 
-              <form onSubmit={handleSearch} className="mt-8 flex gap-2 max-w-lg">
+              <form
+                onSubmit={handleSearch}
+                className="mt-8 flex gap-2 max-w-lg"
+              >
                 <div className="relative flex-1">
                   <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-oya-teal/40 w-5 h-5" />
                   <input
@@ -88,11 +91,38 @@ const LandingPage = () => {
 
             <div className="flex justify-center lg:justify-end">
               <img
-                src="/images/hero-bird.svg"
-                alt="Oya Deliver bird with leaf wing and basket"
-                className="w-full max-w-md lg:max-w-lg"
+                src={logoOnlyText}
+                alt="Oya Deliver logo"
+                className="w-full max-w-md lg:max-w-lg rounded-xl shadow-sm ring-1 ring-oya-teal/10"
               />
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+        <div className="grid gap-4 sm:grid-cols-3">
+          <div className="rounded-lg border border-oya-teal/10 bg-white p-6">
+            <p className="text-sm font-semibold text-oya-teal">
+              Wide assortment
+            </p>
+            <p className="mt-3 text-sm text-oya-teal/70">
+              Shop fresh food, pantry essentials, and household staples in one
+              place.
+            </p>
+          </div>
+          <div className="rounded-lg border border-oya-teal/10 bg-white p-6">
+            <p className="text-sm font-semibold text-oya-teal">Fast delivery</p>
+            <p className="mt-3 text-sm text-oya-teal/70">
+              Get your groceries delivered to your door with clear next-step
+              ordering.
+            </p>
+          </div>
+          <div className="rounded-lg border border-oya-teal/10 bg-white p-6">
+            <p className="text-sm font-semibold text-oya-teal">Easy ordering</p>
+            <p className="mt-3 text-sm text-oya-teal/70">
+              Search, browse, and checkout in a few clean, connected steps.
+            </p>
           </div>
         </div>
       </section>
@@ -101,8 +131,12 @@ const LandingPage = () => {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
         <div className="flex items-end justify-between mb-8">
           <div>
-            <h2 className="text-2xl font-extrabold text-oya-teal">Shop by category</h2>
-            <p className="text-oya-teal/60 mt-1">Pick a aisle and start filling your cart</p>
+            <h2 className="text-2xl font-extrabold text-oya-teal">
+              Shop by category
+            </h2>
+            <p className="text-oya-teal/60 mt-1">
+              Pick a aisle and start filling your cart
+            </p>
           </div>
           <Link
             to="/products"
@@ -117,7 +151,9 @@ const LandingPage = () => {
             <Link
               key={cat}
               to={`/products?category=${encodeURIComponent(cat)}`}
-              className={`bg-white border border-oya-teal/10 border-l-4 ${categoryAccent[cat] ?? 'border-l-oya-teal'} rounded-lg p-5 hover:border-oya-green/40 transition-colors`}
+              className={`bg-white border border-oya-teal/10 border-l-4 ${
+                categoryAccent[cat] ?? "border-l-oya-teal"
+              } rounded-lg p-5 hover:border-oya-green/40 transition-colors`}
             >
               <span className="font-bold text-sm text-oya-teal">{cat}</span>
             </Link>
@@ -130,8 +166,12 @@ const LandingPage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-end justify-between mb-8">
             <div>
-              <h2 className="text-2xl font-extrabold text-oya-teal">Featured picks</h2>
-              <p className="text-oya-teal/60 mt-1">Popular items our customers love</p>
+              <h2 className="text-2xl font-extrabold text-oya-teal">
+                Featured picks
+              </h2>
+              <p className="text-oya-teal/60 mt-1">
+                Popular items our customers love
+              </p>
             </div>
             <Link
               to="/products"
@@ -143,7 +183,9 @@ const LandingPage = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {loading
-              ? Array.from({ length: 4 }).map((_, i) => <ProductCardSkeleton key={i} />)
+              ? Array.from({ length: 4 }).map((_, i) => (
+                  <ProductCardSkeleton key={i} />
+                ))
               : featured.map((product) => (
                   <ProductCard key={product.id} product={product} />
                 ))}
