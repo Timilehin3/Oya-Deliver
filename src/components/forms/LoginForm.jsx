@@ -62,7 +62,7 @@ const LoginForm = () => {
   return (
     <div className="space-y-6">
       {!firebaseConfigured && (
-        <div className="rounded-3xl border border-oya-amber/30 bg-oya-amber/10 p-4 text-sm text-oya-teal">
+        <div className="rounded-lg border border-oya-amber/30 bg-oya-amber/10 p-4 text-sm text-oya-teal">
           Firebase is not configured. Copy{" "}
           <code className="rounded px-1 bg-slate-100">.env.example</code> to{" "}
           <code className="rounded px-1 bg-slate-100">.env</code> and set your
@@ -85,7 +85,7 @@ const LoginForm = () => {
             value={form.email}
             onChange={handleChange}
             disabled={!firebaseConfigured || loading}
-            className="w-full rounded-3xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-oya-green focus:ring-2 focus:ring-oya-green/20"
+            className="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-oya-green focus:ring-2 focus:ring-oya-green/20"
             placeholder="hello@example.com"
           />
           {errors.email && (
@@ -108,7 +108,7 @@ const LoginForm = () => {
               value={form.password}
               onChange={handleChange}
               disabled={!firebaseConfigured || loading}
-              className="w-full rounded-3xl border border-slate-300 bg-white px-4 pr-12 py-3 text-sm text-slate-900 outline-none transition focus:border-oya-green focus:ring-2 focus:ring-oya-green/20"
+              className="w-full rounded-lg border border-slate-300 bg-white px-4 pr-12 py-3 text-sm text-slate-900 outline-none transition focus:border-oya-green focus:ring-2 focus:ring-oya-green/20"
               placeholder="••••••••"
             />
             <button
@@ -130,7 +130,7 @@ const LoginForm = () => {
         </div>
 
         {errors.form && (
-          <p className="rounded-3xl border border-rose-200 bg-rose-100 px-4 py-3 text-sm text-rose-700">
+          <p className="rounded-lg border border-rose-200 bg-rose-100 px-4 py-3 text-sm text-rose-700">
             {errors.form}
           </p>
         )}
@@ -138,7 +138,7 @@ const LoginForm = () => {
         <button
           type="submit"
           disabled={!firebaseConfigured || loading}
-          className="inline-flex w-full items-center justify-center rounded-full bg-oya-teal px-5 py-3 text-sm font-semibold text-white transition hover:bg-oya-green disabled:cursor-not-allowed disabled:bg-slate-300"
+          className="inline-flex w-full items-center justify-center rounded-lg bg-oya-teal px-5 py-3 text-sm font-semibold text-white transition hover:bg-oya-green disabled:cursor-not-allowed disabled:bg-slate-300"
         >
           {loading ? "Signing in…" : "Sign in"}
         </button>

@@ -51,7 +51,7 @@ const CartPage = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between mb-8">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between mb-4">
         <div>
           <p className="text-sm font-semibold text-oya-green uppercase tracking-[0.25em]">
             Your Basket
@@ -69,6 +69,14 @@ const CartPage = () => {
         </Link>
       </div>
 
+      <div className="rounded-lg border border-oya-teal/10 bg-oya-paper p-5 mb-8">
+        <p className="text-sm font-semibold text-oya-teal">Ready to checkout</p>
+        <p className="mt-2 text-sm text-oya-teal/70">
+          Review your basket items, then enter delivery details for a smooth
+          checkout.
+        </p>
+      </div>
+
       <div className="grid gap-8 lg:grid-cols-[1.6fr_0.9fr]">
         <div className="space-y-4">
           {items.map((item) => (
@@ -83,7 +91,7 @@ const CartPage = () => {
         </div>
 
         <aside className="space-y-6">
-          <div className="rounded-[2rem] border border-oya-teal/10 bg-white p-6">
+          <div className="rounded-lg border border-oya-teal/10 bg-white p-6">
             <h2 className="text-xl font-extrabold text-oya-teal mb-5">
               Order summary
             </h2>

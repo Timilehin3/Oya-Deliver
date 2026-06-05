@@ -5,9 +5,9 @@ const CartItem = ({ item, onQuantityChange, onRemove, updating = false }) => {
   if (!item) return null;
 
   return (
-    <div className="grid gap-4 rounded-[2rem] border border-oya-teal/10 bg-white p-5 sm:grid-cols-[1.4fr_0.9fr]">
+    <div className="grid gap-4 rounded-lg border border-oya-teal/10 bg-white p-5 sm:grid-cols-[1.4fr_0.9fr]">
       <div className="flex items-center gap-4">
-        <div className="flex h-24 w-24 items-center justify-center rounded-3xl bg-oya-paper border border-oya-teal/10 p-4">
+        <div className="flex h-24 w-24 items-center justify-center rounded-xl bg-oya-paper border border-oya-teal/10 p-4">
           <img
             src={item.image}
             alt={item.name}
@@ -25,7 +25,7 @@ const CartItem = ({ item, onQuantityChange, onRemove, updating = false }) => {
 
       <div className="flex flex-col justify-between gap-4">
         <div className="flex items-center justify-between gap-3">
-          <div className="inline-flex items-center rounded-full border border-oya-teal/20 bg-oya-paper overflow-hidden">
+          <div className="inline-flex items-center rounded-lg border border-oya-teal/20 bg-oya-paper overflow-hidden">
             <button
               type="button"
               onClick={() => onQuantityChange(item.id, item.quantity - 1)}

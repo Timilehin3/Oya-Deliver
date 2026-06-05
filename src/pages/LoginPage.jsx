@@ -3,9 +3,9 @@ import LoginForm from "../components/forms/LoginForm";
 
 const LoginPage = () => (
   <section className="min-h-[calc(100vh-6rem)] flex items-center justify-center px-4 py-12">
-    <div className="mx-auto w-full max-w-5xl rounded-[2.5rem] bg-white/90 p-8 shadow-xl shadow-slate-200/50 ring-1 ring-slate-200 backdrop-blur-sm lg:grid lg:grid-cols-[1.2fr_0.8fr] lg:gap-10 lg:p-12">
+    <div className="mx-auto w-full max-w-5xl rounded-xl bg-white/90 p-8 shadow-sm shadow-slate-200/50 ring-1 ring-slate-200 lg:grid lg:grid-cols-[1.2fr_0.8fr] lg:gap-10 lg:p-12">
       <div className="space-y-6">
-        <div className="inline-flex items-center gap-3 rounded-full bg-oya-green/10 px-4 py-2 text-sm font-semibold text-oya-teal">
+        <div className="inline-flex items-center gap-3 rounded-lg bg-oya-green/10 px-4 py-2 text-sm font-semibold text-oya-teal">
           Welcome back to Oya Deliver
         </div>
         <div>
@@ -18,7 +18,7 @@ const LoginPage = () => (
           </p>
         </div>
 
-        <div className="grid gap-4 rounded-3xl border border-slate-200 bg-oya-paper p-5 text-sm text-slate-700">
+        <div className="grid gap-4 rounded-lg border border-slate-200 bg-oya-paper p-5 text-sm text-slate-700">
           <p>
             Demo account: <span className="font-semibold">user@test.com</span> /{" "}
             <span className="font-semibold">password123</span>
@@ -32,7 +32,7 @@ const LoginPage = () => (
       </div>
 
       <div className="mt-8 lg:mt-0">
-        <div className="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-sm">
+        <div className="rounded-lg border border-slate-200 bg-white p-8 shadow-sm">
           <h2 className="text-2xl font-bold text-oya-teal">Sign in</h2>
           <p className="mt-2 text-sm text-slate-600">
             Enter your credentials to continue to your grocery delivery

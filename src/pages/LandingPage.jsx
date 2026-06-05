@@ -93,9 +93,36 @@ const LandingPage = () => {
               <img
                 src={logoOnlyText}
                 alt="Oya Deliver logo"
-                className="w-full max-w-md lg:max-w-lg rounded-3xl shadow-2xl ring-1 ring-oya-teal/10"
+                className="w-full max-w-md lg:max-w-lg rounded-xl shadow-sm ring-1 ring-oya-teal/10"
               />
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+        <div className="grid gap-4 sm:grid-cols-3">
+          <div className="rounded-lg border border-oya-teal/10 bg-white p-6">
+            <p className="text-sm font-semibold text-oya-teal">
+              Wide assortment
+            </p>
+            <p className="mt-3 text-sm text-oya-teal/70">
+              Shop fresh food, pantry essentials, and household staples in one
+              place.
+            </p>
+          </div>
+          <div className="rounded-lg border border-oya-teal/10 bg-white p-6">
+            <p className="text-sm font-semibold text-oya-teal">Fast delivery</p>
+            <p className="mt-3 text-sm text-oya-teal/70">
+              Get your groceries delivered to your door with clear next-step
+              ordering.
+            </p>
+          </div>
+          <div className="rounded-lg border border-oya-teal/10 bg-white p-6">
+            <p className="text-sm font-semibold text-oya-teal">Easy ordering</p>
+            <p className="mt-3 text-sm text-oya-teal/70">
+              Search, browse, and checkout in a few clean, connected steps.
+            </p>
           </div>
         </div>
       </section>
