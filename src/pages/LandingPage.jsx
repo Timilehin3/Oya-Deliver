@@ -93,7 +93,7 @@ const LandingPage = () => {
               <img
                 src={logoOnlyText}
                 alt="Oya Deliver logo"
-                className="w-full max-w-md lg:max-w-lg"
+                className="w-full max-w-md lg:max-w-lg rounded-3xl shadow-2xl ring-1 ring-oya-teal/10"
               />
             </div>
           </div>
