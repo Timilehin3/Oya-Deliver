@@ -1,5 +1,5 @@
-import { FiMinus, FiPlus } from 'react-icons/fi';
-import { formatPrice } from '../../utils/formatPrice';
+import { FiMinus, FiPlus } from "react-icons/fi";
+import { formatPrice } from "../../utils/formatPrice";
 
 const CartItem = ({ item, onQuantityChange, onRemove, updating = false }) => {
   if (!item) return null;
@@ -34,7 +34,9 @@ const CartItem = ({ item, onQuantityChange, onRemove, updating = false }) => {
             >
               <FiMinus className="w-4 h-4" />
             </button>
-            <span className="px-4 text-sm font-semibold text-oya-teal">{item.quantity}</span>
+            <span className="px-4 text-sm font-semibold text-oya-teal">
+              {item.quantity}
+            </span>
             <button
               type="button"
               onClick={() => onQuantityChange(item.id, item.quantity + 1)}

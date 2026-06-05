@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 import toast from "react-hot-toast";
 import { useAuth } from "../../context/AuthContext";
 import { isEmail, required } from "../../utils/validate";
@@ -19,6 +20,8 @@ const RegisterForm = () => {
   });
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -164,16 +167,30 @@ const RegisterForm = () => {
           >
             Password
           </label>
-          <input
-            id="password"
-            name="password"
-            type="password"
-            value={form.password}
-            onChange={handleChange}
-            disabled={!firebaseConfigured || loading}
-            className="w-full rounded-3xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-oya-green focus:ring-2 focus:ring-oya-green/20"
-            placeholder="At least 6 characters"
-          />
+          <div className="relative">
+            <input
+              id="password"
+              name="password"
+              type={showPassword ? "text" : "password"}
+              value={form.password}
+              onChange={handleChange}
+              disabled={!firebaseConfigured || loading}
+              className="w-full rounded-3xl border border-slate-300 bg-white px-4 pr-12 py-3 text-sm text-slate-900 outline-none transition focus:border-oya-green focus:ring-2 focus:ring-oya-green/20"
+              placeholder="At least 6 characters"
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword((s) => !s)}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-oya-teal"
+              aria-label={showPassword ? "Hide password" : "Show password"}
+            >
+              {showPassword ? (
+                <FiEyeOff className="w-5 h-5" />
+              ) : (
+                <FiEye className="w-5 h-5" />
+              )}
+            </button>
+          </div>
           {errors.password && (
             <p className="mt-2 text-sm text-rose-600">{errors.password}</p>
           )}
@@ -186,16 +203,34 @@ const RegisterForm = () => {
           >
             Confirm password
           </label>
-          <input
-            id="confirmPassword"
-            name="confirmPassword"
-            type="password"
-            value={form.confirmPassword}
-            onChange={handleChange}
-            disabled={!firebaseConfigured || loading}
-            className="w-full rounded-3xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-oya-green focus:ring-2 focus:ring-oya-green/20"
-            placeholder="Repeat your password"
-          />
+          <div className="relative">
+            <input
+              id="confirmPassword"
+              name="confirmPassword"
+              type={showConfirm ? "text" : "password"}
+              value={form.confirmPassword}
+              onChange={handleChange}
+              disabled={!firebaseConfigured || loading}
+              className="w-full rounded-3xl border border-slate-300 bg-white px-4 pr-12 py-3 text-sm text-slate-900 outline-none transition focus:border-oya-green focus:ring-2 focus:ring-oya-green/20"
+              placeholder="Repeat your password"
+            />
+            <button
+              type="button"
+              onClick={() => setShowConfirm((s) => !s)}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-oya-teal"
+              aria-label={
+                showConfirm
+                  ? "Hide confirmation password"
+                  : "Show confirmation password"
+              }
+            >
+              {showConfirm ? (
+                <FiEyeOff className="w-5 h-5" />
+              ) : (
+                <FiEye className="w-5 h-5" />
+              )}
+            </button>
+          </div>
           {errors.confirmPassword && (
             <p className="mt-2 text-sm text-rose-600">
               {errors.confirmPassword}
