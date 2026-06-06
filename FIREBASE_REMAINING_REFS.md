@@ -15,18 +15,23 @@ After scanning `src/` for Firestore API usages (`getDoc`, `setDoc`, `onSnapshot`
 
 ## Detailed Inventory
 
-### 1. **`src/firebase/config.js`** ✋ *Still Active* 
+### 1. **`src/firebase/config.js`** ✋ _Still Active_
 
 **Status:** Exports `firebaseConfigured` flag for fallback checks; actual Firebase initialization kept but not used in app logic.
 
 **Current Content:**
-```javascript
-import { initializeApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
 
-const firebaseConfig = { /* env-gated config */ };
-export const firebaseConfigured = Boolean(import.meta.env.VITE_FIREBASE_API_KEY);
+```javascript
+import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
+
+const firebaseConfig = {
+  /* env-gated config */
+};
+export const firebaseConfigured = Boolean(
+  import.meta.env.VITE_FIREBASE_API_KEY
+);
 
 let app, auth, db;
 if (firebaseConfigured) {
@@ -39,10 +44,12 @@ export { auth, db };
 ```
 
 **Why kept:**
+
 - Exported `firebaseConfigured` flag used in form UI to detect "neither Supabase nor Firebase" state.
 - Env-gated initialization; safe to leave in place.
 
 **Migration path:**
+
 - **Option A (Recommended):** Keep as-is; mark deprecated in comments since app prefers Clerk + Supabase.
 - **Option B:** Remove entirely once forms updated to check only `supabaseConfigured && clerkPublishableKey`.
 
@@ -53,11 +60,13 @@ export { auth, db };
 ### 2. **`src/components/forms/LoginForm.jsx`** — Fallback Check
 
 **Line 7:** Imports `firebaseConfigured`
+
 ```javascript
 import { firebaseConfigured } from "../../firebase/config";
 ```
 
 **Lines 65, 85, 108, 138, 144:** Used in conditional checks
+
 ```javascript
 {!(supabaseConfigured || firebaseConfigured) && (
   <ErrorMessage>Backend is not configured...</ErrorMessage>
@@ -74,11 +83,13 @@ disabled={!(supabaseConfigured || firebaseConfigured) || loading}
 ### 3. **`src/components/forms/RegisterForm.jsx`** — Fallback Check
 
 **Line 7:** Imports `firebaseConfigured`
+
 ```javascript
 import { firebaseConfigured } from "../../firebase/config";
 ```
 
 **Lines 88, 111, 133, 155, 178, 214, 250:** Used in conditional checks
+
 ```javascript
 {!(supabaseConfigured || firebaseConfigured) && (
   <ErrorMessage>Supabase or Firebase keys...</ErrorMessage>
@@ -96,13 +107,13 @@ disabled={!(supabaseConfigured || firebaseConfigured) || loading}
 
 ### ✅ Already Migrated
 
-| API / Pattern | Previous File | Migrated To | Status |
-|---|---|---|---|
-| `onSnapshot(collection(...))` | CartContext | Supabase realtime `.on('postgres_changes')` | ✅ Complete |
-| `setDoc(doc(...), data)` | AuthContext | Supabase `.insert()` / `.update()` | ✅ Complete |
-| `getDoc(doc(...))` | AuthContext, CheckoutPage | Supabase `.select()` | ✅ Complete |
-| Cart persistence | CartContext | Supabase `.upsert()` | ✅ Complete |
-| User profile sync | AuthContext | Supabase `users` table + Clerk | ✅ Complete |
+| API / Pattern                 | Previous File             | Migrated To                                 | Status      |
+| ----------------------------- | ------------------------- | ------------------------------------------- | ----------- |
+| `onSnapshot(collection(...))` | CartContext               | Supabase realtime `.on('postgres_changes')` | ✅ Complete |
+| `setDoc(doc(...), data)`      | AuthContext               | Supabase `.insert()` / `.update()`          | ✅ Complete |
+| `getDoc(doc(...))`            | AuthContext, CheckoutPage | Supabase `.select()`                        | ✅ Complete |
+| Cart persistence              | CartContext               | Supabase `.upsert()`                        | ✅ Complete |
+| User profile sync             | AuthContext               | Supabase `users` table + Clerk              | ✅ Complete |
 
 ### ❌ Not Found / Never Used
 
@@ -115,11 +126,13 @@ No active usage of: `addDoc`, `deleteDoc`, `getDocs`, Firestore queries with `wh
 ### **Phase 1 (Immediate)** — Clean Config
 
 **Option A: Deprecate Firebase gracefully (Recommended)**
+
 - Add `@deprecated` JSDoc to `src/firebase/config.js` exports
 - Keep file in place; update message to "Firebase imports deprecated; use Supabase instead"
 - No code changes needed
 
 **Option B: Remove Firebase entirely**
+
 - Delete `src/firebase/config.js`
 - Update `LoginForm.jsx` & `RegisterForm.jsx` to check only `supabaseConfigured`
 - Remove Firebase imports from `package.json` and reinstall
@@ -127,12 +140,14 @@ No active usage of: `addDoc`, `deleteDoc`, `getDocs`, Firestore queries with `wh
 ### **Phase 2 (Optional)** — Clean Dependencies
 
 Run:
+
 ```bash
 npm uninstall firebase @firebase/app @firebase/auth @firebase/firestore
 npm install
 ```
 
 Then verify no import errors:
+
 ```bash
 npm run build
 ```
@@ -140,6 +155,7 @@ npm run build
 ### **Phase 3 (Production)** — Environment Variables
 
 Remove or mark obsolete in `.env`:
+
 ```
 # VITE_FIREBASE_API_KEY=
 # VITE_FIREBASE_AUTH_DOMAIN=

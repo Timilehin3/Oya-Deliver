@@ -63,7 +63,10 @@ const LoginForm = () => {
     <div className="space-y-6">
       {!supabaseConfigured && (
         <div className="rounded-lg border border-oya-amber/30 bg-oya-amber/10 p-4 text-sm text-oya-teal">
-          Backend is not configured. Copy <code className="rounded px-1 bg-slate-100">.env.example</code> to <code className="rounded px-1 bg-slate-100">.env</code> and set your Supabase keys.
+          Backend is not configured. Copy{" "}
+          <code className="rounded px-1 bg-slate-100">.env.example</code> to{" "}
+          <code className="rounded px-1 bg-slate-100">.env</code> and set your
+          Supabase keys.
         </div>
       )}
 
