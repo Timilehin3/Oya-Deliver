@@ -8,14 +8,20 @@ import { ClerkProvider } from '@clerk/clerk-react';
 
 const clerkPublishableKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
+const AppTree = (
+  <AuthProvider>
+    <CartProvider>
+      <App />
+    </CartProvider>
+  </AuthProvider>
+);
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <ClerkProvider publishableKey={clerkPublishableKey}>
-      <AuthProvider>
-        <CartProvider>
-          <App />
-        </CartProvider>
-      </AuthProvider>
-    </ClerkProvider>
+    {clerkPublishableKey ? (
+      <ClerkProvider publishableKey={clerkPublishableKey}>{AppTree}</ClerkProvider>
+    ) : (
+      AppTree
+    )}
   </StrictMode>,
 );
