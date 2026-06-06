@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@clerk/clerk-react": "^5.61.3",
+    "@supabase/supabase-js": "^2.107.0",
     "@tailwindcss/vite": "^4.3.0",
     "firebase": "^12.14.0",
     "react": "^19.2.6",

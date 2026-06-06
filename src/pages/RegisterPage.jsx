@@ -1,5 +1,8 @@
 import { Link } from "react-router-dom";
 import RegisterForm from "../components/forms/RegisterForm";
+import { SignUpButton } from '@clerk/clerk-react';
+
+const clerkConfigured = Boolean(import.meta.env.VITE_CLERK_PUBLISHABLE_KEY);
 
 const RegisterPage = () => (
   <section className="min-h-[calc(100vh-6rem)] flex items-center justify-center px-4 py-12">
@@ -35,7 +38,16 @@ const RegisterPage = () => (
           <p className="mt-2 text-sm text-slate-600">
             Start shopping with Oya Deliver and save your delivery details.
           </p>
-          <RegisterForm />
+          {clerkConfigured ? (
+            <div className="space-y-4">
+              <p className="text-sm text-slate-600">Create an account using Clerk (recommended).</p>
+              <SignUpButton>
+                <button className="w-full rounded-lg bg-oya-teal text-white py-2">Sign up with Clerk</button>
+              </SignUpButton>
+            </div>
+          ) : (
+            <RegisterForm />
+          )}
         </div>
 
         <p className="mt-6 text-center text-sm text-slate-600">

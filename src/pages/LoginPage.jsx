@@ -1,5 +1,8 @@
 import { Link } from "react-router-dom";
 import LoginForm from "../components/forms/LoginForm";
+import { SignInButton } from '@clerk/clerk-react';
+
+const clerkConfigured = Boolean(import.meta.env.VITE_CLERK_PUBLISHABLE_KEY);
 
 const LoginPage = () => (
   <section className="min-h-[calc(100vh-6rem)] flex items-center justify-center px-4 py-12">
@@ -38,7 +41,16 @@ const LoginPage = () => (
             Enter your credentials to continue to your grocery delivery
             dashboard.
           </p>
-          <LoginForm />
+          {clerkConfigured ? (
+            <div className="space-y-4">
+              <p className="text-sm text-slate-600">Sign in using Clerk (recommended).</p>
+              <SignInButton>
+                <button className="w-full rounded-lg bg-oya-teal text-white py-2">Sign in with Clerk</button>
+              </SignInButton>
+            </div>
+          ) : (
+            <LoginForm />
+          )}
         </div>
 
         <p className="mt-6 text-center text-sm text-slate-600">
