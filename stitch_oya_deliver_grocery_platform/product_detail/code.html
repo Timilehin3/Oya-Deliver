@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Product Detail - Oyadeliver</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-dim": "#dad9dd",
+                        "surface-container-low": "#f4f3f7",
+                        "surface-container-high": "#e9e7eb",
+                        "surface-container": "#eeedf1",
+                        "primary": "#022448",
+                        "surface-tint": "#455f87",
+                        "primary-fixed": "#d5e3ff",
+                        "on-surface-variant": "#43474e",
+                        "on-secondary": "#ffffff",
+                        "secondary-container": "#d6e0f4",
+                        "on-tertiary-fixed-variant": "#60410c",
+                        "on-background": "#1a1c1e",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed-dim": "#bdc7da",
+                        "tertiary": "#341f00",
+                        "outline-variant": "#c4c6cf",
+                        "on-primary-fixed": "#001c3b",
+                        "tertiary-fixed-dim": "#edbf7f",
+                        "surface-container-highest": "#e3e2e6",
+                        "on-primary-container": "#8aa4cf",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error": "#ffffff",
+                        "surface-variant": "#e3e2e6",
+                        "primary-container": "#1e3a5f",
+                        "on-surface": "#1a1c1e",
+                        "on-secondary-fixed-variant": "#3e4757",
+                        "on-tertiary-fixed": "#291800",
+                        "on-error-container": "#93000a",
+                        "secondary": "#555f70",
+                        "on-primary-fixed-variant": "#2d486d",
+                        "on-primary": "#ffffff",
+                        "inverse-on-surface": "#f1f0f4",
+                        "background": "#F9F6EE",
+                        "inverse-surface": "#2f3033",
+                        "on-secondary-fixed": "#121c2a",
+                        "error-container": "#ffdad6",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed": "#ffddb2",
+                        "surface": "#faf9fc",
+                        "tertiary-container": "#503300",
+                        "on-secondary-container": "#5a6374",
+                        "outline": "#74777f",
+                        "inverse-primary": "#adc8f5",
+                        "secondary-fixed": "#d9e3f7",
+                        "on-tertiary-container": "#c69b5f",
+                        "primary-fixed-dim": "#adc8f5",
+                        "surface-bright": "#faf9fc",
+                        "leaf-green": "#4ade80",
+                        "slate-blue": "#022448",
+                        "warm-orange": "#f97316"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "lg": "24px",
+                        "base": "8px",
+                        "gutter": "16px",
+                        "container-max": "1280px",
+                        "xl": "32px",
+                        "xs": "4px",
+                        "sm": "8px",
+                        "md": "16px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "display-logo": ["Plus Jakarta Sans"],
+                        "label-bold": ["Inter"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "display-logo": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-bold": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #F9F6EE;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-[#F9F6EE] text-on-background antialiased pt-16 flex flex-col min-h-screen">
+<!-- TopNavBar -->
+<nav class="bg-primary dark:bg-primary-container h-16 flex justify-between items-center px-lg w-full fixed top-0 z-50 border-b border-outline-variant dark:border-outline shadow-sm">
+<div class="flex items-center gap-2 font-display-logo text-display-logo text-on-primary dark:text-on-primary-container">
+            Oyadeliver
+        </div>
+<div class="hidden md:flex gap-md h-full items-end">
+<a class="text-on-primary/70 dark:text-on-primary-container/70 font-label-bold text-label-bold hover:opacity-80 transition-opacity h-full flex items-center px-sm" href="#">Home</a>
+<a class="text-on-primary font-bold border-b-2 border-on-primary pb-1 font-label-bold text-label-bold hover:opacity-80 transition-opacity h-full flex items-center px-sm" href="#">Products</a>
+</div>
+<div class="flex items-center gap-md text-on-primary dark:text-on-primary-container">
+<button class="hover:opacity-80 transition-opacity"><span class="material-symbols-outlined">shopping_cart</span></button>
+<button class="hover:opacity-80 transition-opacity"><span class="material-symbols-outlined">account_circle</span></button>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-grow max-w-container-max mx-auto w-full px-gutter md:px-lg py-lg grid grid-cols-1 md:grid-cols-2 gap-lg md:gap-xl">
+<!-- Image Section -->
+<div class="w-full flex flex-col gap-md">
+<div class="w-full rounded-xl overflow-hidden border border-outline-variant bg-surface-container-lowest">
+<img alt="Product placeholder" class="w-full h-auto object-cover aspect-[1.78]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGG_rJSREAWyE4wem2Jx8KPW9cvBsrC-Pyryp3j6zm7rYtmbA2rFLmA7lq_Bhv6paP3Mhb4sntrWzg7dlYoe79Lc2tTUQx-_a_YWdFBnylh0q1V-4mcuwjoGdfg5rfwbyVICGui_SZc_S2HNK8j0Uo1sQyADRfv07j-XsEAMWxzxE6Jr4TvmwIaJGWHdTIH2S7j_rvhBPTTbdrx-E7wcoNBcEpaf5mdhTbB1ai28EqYhFDgS21ej6SLsviX7jwb8hDV_HKG6Dzg4Qi"/>
+</div>
+<div class="flex gap-sm overflow-x-auto pb-sm">
+<!-- Thumbnail placeholders, assuming same image for demo -->
+<div class="w-20 h-20 rounded-lg border border-primary flex-shrink-0 cursor-pointer overflow-hidden opacity-100">
+<img alt="Thumbnail 1" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGG_rJSREAWyE4wem2Jx8KPW9cvBsrC-Pyryp3j6zm7rYtmbA2rFLmA7lq_Bhv6paP3Mhb4sntrWzg7dlYoe79Lc2tTUQx-_a_YWdFBnylh0q1V-4mcuwjoGdfg5rfwbyVICGui_SZc_S2HNK8j0Uo1sQyADRfv07j-XsEAMWxzxE6Jr4TvmwIaJGWHdTIH2S7j_rvhBPTTbdrx-E7wcoNBcEpaf5mdhTbB1ai28EqYhFDgS21ej6SLsviX7jwb8hDV_HKG6Dzg4Qi"/>
+</div>
+<div class="w-20 h-20 rounded-lg border border-outline-variant flex-shrink-0 cursor-pointer overflow-hidden opacity-70 hover:opacity-100 transition-opacity">
+<img alt="Thumbnail 2" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGG_rJSREAWyE4wem2Jx8KPW9cvBsrC-Pyryp3j6zm7rYtmbA2rFLmA7lq_Bhv6paP3Mhb4sntrWzg7dlYoe79Lc2tTUQx-_a_YWdFBnylh0q1V-4mcuwjoGdfg5rfwbyVICGui_SZc_S2HNK8j0Uo1sQyADRfv07j-XsEAMWxzxE6Jr4TvmwIaJGWHdTIH2S7j_rvhBPTTbdrx-E7wcoNBcEpaf5mdhTbB1ai28EqYhFDgS21ej6SLsviX7jwb8hDV_HKG6Dzg4Qi"/>
+</div>
+<div class="w-20 h-20 rounded-lg border border-outline-variant flex-shrink-0 cursor-pointer overflow-hidden opacity-70 hover:opacity-100 transition-opacity">
+<img alt="Thumbnail 3" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGG_rJSREAWyE4wem2Jx8KPW9cvBsrC-Pyryp3j6zm7rYtmbA2rFLmA7lq_Bhv6paP3Mhb4sntrWzg7dlYoe79Lc2tTUQx-_a_YWdFBnylh0q1V-4mcuwjoGdfg5rfwbyVICGui_SZc_S2HNK8j0Uo1sQyADRfv07j-XsEAMWxzxE6Jr4TvmwIaJGWHdTIH2S7j_rvhBPTTbdrx-E7wcoNBcEpaf5mdhTbB1ai28EqYhFDgS21ej6SLsviX7jwb8hDV_HKG6Dzg4Qi"/>
+</div>
+</div>
+</div>
+<!-- Details Section -->
+<div class="w-full flex flex-col gap-md bg-surface-container-lowest p-lg rounded-xl border border-outline-variant">
+<div class="flex justify-between items-start gap-md">
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-background">Organic Honeycrisp Apples</h1>
+<span class="bg-warm-orange text-white font-label-bold text-label-bold px-md py-xs rounded-full whitespace-nowrap">In Stock</span>
+</div>
+<div class="font-headline-md text-headline-md text-slate-blue">
+                $4.99 <span class="font-body-md text-body-md text-on-surface-variant font-normal">/ lb</span>
+</div>
+<div class="h-px bg-outline-variant w-full my-sm"></div>
+<p class="font-body-lg text-body-lg text-on-surface-variant">
+                Crisp, sweet, and incredibly juicy. These organic Honeycrisp apples are sourced directly from local orchards. Perfect for snacking, baking, or adding a refreshing crunch to your salads. Naturally grown without synthetic pesticides.
+            </p>
+<div class="mt-auto flex flex-col gap-md pt-lg">
+<div class="flex items-center gap-md">
+<label class="font-label-bold text-label-bold text-on-background uppercase">Quantity</label>
+<div class="flex items-center border border-outline-variant rounded-lg overflow-hidden h-10 w-32">
+<button class="w-10 h-full bg-surface-container flex items-center justify-center hover:bg-surface-container-highest transition-colors text-on-surface">
+<span class="material-symbols-outlined text-[18px]">remove</span>
+</button>
+<input class="w-full h-full border-0 text-center font-body-md text-body-md focus:ring-0 p-0 m-0 bg-surface-container-lowest" min="1" type="number" value="1"/>
+<button class="w-10 h-full bg-surface-container flex items-center justify-center hover:bg-surface-container-highest transition-colors text-on-surface">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+</div>
+<div class="flex gap-md">
+<button class="flex-grow bg-leaf-green text-white font-label-bold text-label-bold h-12 rounded-lg flex items-center justify-center gap-sm hover:opacity-90 transition-opacity uppercase tracking-wider">
+<span class="material-symbols-outlined">shopping_cart</span>
+                        Add to Cart
+                    </button>
+<button class="h-12 w-12 border border-outline-variant rounded-lg flex items-center justify-center text-on-surface-variant hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-primary dark:bg-primary-container border-t border-outline-variant dark:border-outline mt-auto w-full">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-xl px-lg py-xl max-w-container-max mx-auto text-on-primary dark:text-on-primary-container">
+<div class="flex flex-col gap-sm">
+<div class="font-display-logo text-display-logo">Oyadeliver</div>
+<p class="font-body-md text-body-md opacity-80">© 2024 Oyadeliver. All rights reserved.</p>
+</div>
+<div class="flex flex-col gap-md">
+<a class="font-body-md text-body-md text-on-primary/50 dark:text-on-primary-container/50 hover:text-on-primary hover:opacity-100 transition-colors duration-200" href="#">About Us</a>
+<a class="font-body-md text-body-md text-on-primary/50 dark:text-on-primary-container/50 hover:text-on-primary hover:opacity-100 transition-colors duration-200" href="#">Help Center</a>
+<a class="font-body-md text-body-md text-on-primary/50 dark:text-on-primary-container/50 hover:text-on-primary hover:opacity-100 transition-colors duration-200" href="#">Social Media</a>
+</div>
+</div>
+</footer>
+</body></html>

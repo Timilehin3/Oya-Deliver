@@ -1,10 +1,15 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { FiShoppingCart, FiUser, FiMenu, FiX } from 'react-icons/fi';
-import logo from '../../assets/oyadeliver_both_textandbird.png';
-import { useAuth } from '../../context/AuthContext';
-import { useCart } from '../../context/CartContext';
-import { SignInButton, SignUpButton, UserButton, useUser } from '@clerk/clerk-react';
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { FiShoppingCart, FiUser, FiMenu, FiX } from "react-icons/fi";
+import logo from "../../assets/oyadeliver_both_textandbird.png";
+import { useAuth } from "../../context/AuthContext";
+import { useCart } from "../../context/CartContext";
+import {
+  SignInButton,
+  SignUpButton,
+  UserButton,
+  useUser,
+} from "@clerk/clerk-react";
 
 const Navbar = () => {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
@@ -23,7 +28,7 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     await logout();
-    navigate('/');
+    navigate("/");
     closeMobileNav();
   };
 
@@ -67,7 +72,7 @@ const Navbar = () => {
                         >
                           <UserButton />
                           <span className="hidden sm:block text-sm font-medium max-w-[120px] truncate">
-                            {clerkUser?.user?.fullName ?? 'Account'}
+                            {clerkUser?.user?.fullName ?? "Account"}
                           </span>
                         </Link>
                       </>
@@ -76,7 +81,9 @@ const Navbar = () => {
                         <SignInButton>
                           <button className="text-oya-teal hover:text-oya-amber transition-colors flex items-center gap-1">
                             <FiUser className="w-6 h-6" />
-                            <span className="hidden sm:block text-sm font-medium">Log in</span>
+                            <span className="hidden sm:block text-sm font-medium">
+                              Log in
+                            </span>
                           </button>
                         </SignInButton>
                         <SignUpButton>
@@ -95,7 +102,7 @@ const Navbar = () => {
                     >
                       <FiUser className="w-6 h-6" />
                       <span className="hidden sm:block text-sm font-medium max-w-[120px] truncate">
-                        {profile?.name ?? 'Account'}
+                        {profile?.name ?? "Account"}
                       </span>
                     </Link>
                     <button
@@ -112,7 +119,9 @@ const Navbar = () => {
                     className="text-oya-teal hover:text-oya-amber transition-colors flex items-center gap-1"
                   >
                     <FiUser className="w-6 h-6" />
-                    <span className="hidden sm:block text-sm font-medium">Log in</span>
+                    <span className="hidden sm:block text-sm font-medium">
+                      Log in
+                    </span>
                   </Link>
                 )}
               </>
@@ -125,7 +134,7 @@ const Navbar = () => {
               <FiShoppingCart className="w-6 h-6" />
               {cartCount > 0 && (
                 <span className="absolute -top-2 -right-2 bg-oya-amber text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
-                  {cartCount > 9 ? '9+' : cartCount}
+                  {cartCount > 9 ? "9+" : cartCount}
                 </span>
               )}
             </Link>
@@ -133,10 +142,14 @@ const Navbar = () => {
             <button
               type="button"
               className="md:hidden text-oya-teal p-1"
-              aria-label={isMobileNavOpen ? 'Close menu' : 'Open menu'}
+              aria-label={isMobileNavOpen ? "Close menu" : "Open menu"}
               onClick={() => setIsMobileNavOpen((open) => !open)}
             >
-              {isMobileNavOpen ? <FiX className="w-6 h-6" /> : <FiMenu className="w-6 h-6" />}
+              {isMobileNavOpen ? (
+                <FiX className="w-6 h-6" />
+              ) : (
+                <FiMenu className="w-6 h-6" />
+              )}
             </button>
           </div>
         </div>

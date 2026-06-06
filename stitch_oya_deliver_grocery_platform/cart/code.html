@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Oyadeliver - Shopping Cart</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined[data-weight="fill"] {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-dim": "#dad9dd",
+                        "surface-container-low": "#f4f3f7",
+                        "surface-container-high": "#e9e7eb",
+                        "surface-container": "#eeedf1",
+                        "primary": "#022448",
+                        "surface-tint": "#455f87",
+                        "primary-fixed": "#d5e3ff",
+                        "on-surface-variant": "#43474e",
+                        "on-secondary": "#ffffff",
+                        "secondary-container": "#d6e0f4",
+                        "on-tertiary-fixed-variant": "#60410c",
+                        "on-background": "#1a1c1e",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed-dim": "#bdc7da",
+                        "tertiary": "#341f00",
+                        "outline-variant": "#c4c6cf",
+                        "on-primary-fixed": "#001c3b",
+                        "tertiary-fixed-dim": "#edbf7f",
+                        "surface-container-highest": "#e3e2e6",
+                        "on-primary-container": "#8aa4cf",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error": "#ffffff",
+                        "surface-variant": "#e3e2e6",
+                        "primary-container": "#1e3a5f",
+                        "on-surface": "#1a1c1e",
+                        "on-secondary-fixed-variant": "#3e4757",
+                        "on-tertiary-fixed": "#291800",
+                        "on-error-container": "#93000a",
+                        "secondary": "#555f70",
+                        "on-primary-fixed-variant": "#2d486d",
+                        "on-primary": "#ffffff",
+                        "inverse-on-surface": "#f1f0f4",
+                        "background": "#faf9fc",
+                        "inverse-surface": "#2f3033",
+                        "on-secondary-fixed": "#121c2a",
+                        "error-container": "#ffdad6",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed": "#ffddb2",
+                        "surface": "#faf9fc",
+                        "tertiary-container": "#503300",
+                        "on-secondary-container": "#5a6374",
+                        "outline": "#74777f",
+                        "inverse-primary": "#adc8f5",
+                        "secondary-fixed": "#d9e3f7",
+                        "on-tertiary-container": "#c69b5f",
+                        "primary-fixed-dim": "#adc8f5",
+                        "surface-bright": "#faf9fc"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "lg": "24px",
+                        "base": "8px",
+                        "gutter": "16px",
+                        "container-max": "1280px",
+                        "xl": "32px",
+                        "xs": "4px",
+                        "sm": "8px",
+                        "md": "16px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter", "sans-serif"],
+                        "headline-md": ["Plus Jakarta Sans", "sans-serif"],
+                        "display-logo": ["Plus Jakarta Sans", "sans-serif"],
+                        "label-bold": ["Inter", "sans-serif"],
+                        "headline-lg": ["Plus Jakarta Sans", "sans-serif"],
+                        "body-lg": ["Inter", "sans-serif"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans", "sans-serif"],
+                        "body-md": ["Inter", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "display-logo": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-bold": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-sans selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopNavBar (Shared Component) -->
+<header class="bg-primary dark:bg-primary-container h-16 flex justify-between items-center px-lg w-full fixed top-0 z-50 shadow-sm border-b border-outline-variant dark:border-outline transition-transform duration-150">
+<div class="flex items-center gap-xl">
+<!-- Brand Logo -->
+<a class="font-display-logo text-display-logo text-on-primary dark:text-on-primary-container flex items-center gap-2 hover:opacity-80 transition-opacity" href="#">
+<span class="material-symbols-outlined" data-icon="local_mall">local_mall</span>
+                Oyadeliver
+            </a>
+<!-- Search Bar (on_left configuration) -->
+<div class="hidden lg:flex relative w-64">
+<span class="material-symbols-outlined absolute left-2 top-1/2 -translate-y-1/2 text-on-primary/50 text-[20px]" data-icon="search">search</span>
+<input class="w-full bg-primary-container border border-outline-variant/30 text-on-primary placeholder:text-on-primary/50 rounded-lg pl-9 pr-4 py-1.5 text-sm focus:outline-none focus:border-on-primary transition-colors" placeholder="Search groceries..." type="text"/>
+</div>
+</div>
+<!-- Navigation Links -->
+<nav class="hidden md:flex items-center gap-lg">
+<a class="font-label-bold text-label-bold text-on-primary/70 dark:text-on-primary-container/70 hover:opacity-80 transition-opacity pb-1" href="#">Home</a>
+<a class="font-label-bold text-label-bold text-on-primary/70 dark:text-on-primary-container/70 hover:opacity-80 transition-opacity pb-1" href="#">Products</a>
+</nav>
+<!-- Trailing Icon Actions -->
+<div class="flex items-center gap-md">
+<button class="relative text-on-primary dark:text-on-primary-container hover:opacity-80 transition-opacity p-2 rounded-full hover:bg-primary-container">
+<span class="material-symbols-outlined text-[24px]" data-icon="shopping_cart">shopping_cart</span>
+<!-- Warm Orange Badge mapped to tertiary-fixed-dim for visual fit within strict config -->
+<span class="absolute top-0 right-0 bg-tertiary-fixed-dim text-on-tertiary-fixed-variant font-label-bold text-[10px] w-4 h-4 flex items-center justify-center rounded-full border border-primary">3</span>
+</button>
+<button class="text-on-primary dark:text-on-primary-container hover:opacity-80 transition-opacity p-2 rounded-full hover:bg-primary-container">
+<span class="material-symbols-outlined text-[24px]" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow pt-24 pb-xl px-lg max-w-container-max mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-lg lg:gap-xl">
+<!-- Cart Items List (Left Column) -->
+<section class="lg:col-span-8 flex flex-col gap-md">
+<div class="flex justify-between items-end mb-sm">
+<h1 class="font-headline-lg text-headline-lg text-on-background">Shopping Cart</h1>
+<span class="font-body-md text-body-md text-on-surface-variant">3 items</span>
+</div>
+<div class="flex flex-col gap-sm">
+<!-- Cart Item 1 -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md flex flex-col sm:flex-row items-start sm:items-center gap-md hover:shadow-[0_1px_2px_rgba(0,0,0,0.05)] transition-shadow">
+<div class="w-24 h-24 bg-surface-container-low rounded-lg overflow-hidden flex-shrink-0 border border-outline-variant/50">
+<img alt="Fresh organic bananas" class="w-full h-full object-cover" data-alt="A bunch of vibrant yellow organic bananas resting on a pristine white surface. The lighting is bright and even, highlighting the fresh, natural texture of the fruit against a minimalist, clean background. The aesthetic is modern, healthy, and highly detailed, perfectly suited for a premium grocery delivery interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3fXE1UorGnNO2XlzF9J01gk5aEtMGkpp0k6GYFtlcr1RAlXUq-yBUJf7Z9ql2NkiBPmPnEoiH5P9XXawULg4zAmNmQZ6YJPN6zLvzA4QbNazUMBaEhIpY9RLZq4vqHpa72ql2ss9Q0Gb9KG9ggX2_MqAkDvKLRjj8s9Myu86XBiQ37nAUoCxqfBGz6oxDn4QwrDsLHyucR4APAgf6T3SCLDVFn6ER2jCREKYwhbCSeloQ-j-M6SITtYEYpSWzxGFmJaizCNKhGEOm"/>
+</div>
+<div class="flex-grow flex flex-col gap-xs">
+<h3 class="font-headline-md text-headline-md text-on-surface">Organic Fairtrade Bananas</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Bunch (Approx. 5-6 ct)</p>
+<p class="font-headline-md text-headline-md text-primary mt-1">$2.49</p>
+</div>
+<div class="flex items-center gap-md sm:ml-auto w-full sm:w-auto justify-between sm:justify-end mt-4 sm:mt-0 pt-4 sm:pt-0 border-t border-outline-variant/30 sm:border-0">
+<!-- Quantity Adjuster -->
+<div class="flex items-center border border-outline-variant rounded-lg bg-surface-container-lowest overflow-hidden h-9">
+<button aria-label="Decrease quantity" class="w-9 h-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="remove">remove</span>
+</button>
+<span class="w-10 text-center font-label-bold text-label-bold text-on-surface border-x border-outline-variant/50">1</span>
+<button aria-label="Increase quantity" class="w-9 h-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="add">add</span>
+</button>
+</div>
+<!-- Remove Button -->
+<button aria-label="Remove item" class="w-9 h-9 flex items-center justify-center text-error hover:bg-error-container/50 rounded-lg transition-colors ml-2" title="Remove">
+<span class="material-symbols-outlined" data-icon="delete">delete</span>
+</button>
+</div>
+</article>
+<!-- Cart Item 2 -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md flex flex-col sm:flex-row items-start sm:items-center gap-md hover:shadow-[0_1px_2px_rgba(0,0,0,0.05)] transition-shadow">
+<div class="w-24 h-24 bg-surface-container-low rounded-lg overflow-hidden flex-shrink-0 border border-outline-variant/50">
+<img alt="Whole milk carton" class="w-full h-full object-cover" data-alt="A clean, minimalist glass bottle of fresh whole milk standing upright. The lighting is soft and studio-quality, casting a gentle shadow on a stark white background. The focus is entirely on the purity and crisp white color of the milk, reflecting a modern, healthy lifestyle grocery aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwbpfK_Ib-JxmyxjnoDyBZQ7-trivJ1Ryf1UsuyELNjS79dhd6IBsKDe3UBhASFW2E87r4ErJd1tTOkxMTc_tkcbsZG8cDTOtvHfh6ueJECjiCDqcRQ2Pl7iuneET5WXY8JSIukhh7D20pBNhw0JHtUCzMaEWWAFYGIlbmSITnv0zuGX_fdGgNIZJxllatWWYU0Lw-ELmuY7XtsMHksLyZ3Z6N9JV8P2PMt7m7U-6jBA6iA5RtToV9WyFNtVKDEbXNLxqw3YYctkDa"/>
+</div>
+<div class="flex-grow flex flex-col gap-xs">
+<h3 class="font-headline-md text-headline-md text-on-surface">Farm Fresh Whole Milk</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">1 Gallon</p>
+<p class="font-headline-md text-headline-md text-primary mt-1">$4.20</p>
+</div>
+<div class="flex items-center gap-md sm:ml-auto w-full sm:w-auto justify-between sm:justify-end mt-4 sm:mt-0 pt-4 sm:pt-0 border-t border-outline-variant/30 sm:border-0">
+<div class="flex items-center border border-outline-variant rounded-lg bg-surface-container-lowest overflow-hidden h-9">
+<button aria-label="Decrease quantity" class="w-9 h-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="remove">remove</span>
+</button>
+<span class="w-10 text-center font-label-bold text-label-bold text-on-surface border-x border-outline-variant/50">2</span>
+<button aria-label="Increase quantity" class="w-9 h-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="add">add</span>
+</button>
+</div>
+<button aria-label="Remove item" class="w-9 h-9 flex items-center justify-center text-error hover:bg-error-container/50 rounded-lg transition-colors ml-2" title="Remove">
+<span class="material-symbols-outlined" data-icon="delete">delete</span>
+</button>
+</div>
+</article>
+<!-- Cart Item 3 -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md flex flex-col sm:flex-row items-start sm:items-center gap-md hover:shadow-[0_1px_2px_rgba(0,0,0,0.05)] transition-shadow">
+<div class="w-24 h-24 bg-surface-container-low rounded-lg overflow-hidden flex-shrink-0 border border-outline-variant/50">
+<img alt="Artisan Sourdough Loaf" class="w-full h-full object-cover" data-alt="A crusty, artisan sourdough bread loaf resting on a rustic wooden cutting board. The scene is brightly lit with natural daylight streaming in, highlighting the textured, golden-brown crust and dusting of white flour. The composition is warm, inviting, and emphasizes high-quality, freshly baked bakery goods." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_UhCnNwby-FkLhqCCVZTqMHrpl5eFM2YsSIVBT6FS1S3DYmURxF0H_X4ZUd7ZG6rXbmfD05eXne5WobQ63AXJ91vncF2lGBRpPNvKcOD3Dnu-zWwQK_ETpF12tJuUVe80oEQNlR1pR_H2zudCcAxbBoL75hKpf9TNrH07iS5OlZrmHiOemgvWJCJdo5aK9RffAx0zXWOKNYbRcC440ewHfLFpHU-LHKkiAOR6M4fyHvA6Lzho2sDM0Kz_NuMouzTG1a6oOjtVOY8I"/>
+</div>
+<div class="flex-grow flex flex-col gap-xs">
+<h3 class="font-headline-md text-headline-md text-on-surface">Artisan Sourdough Loaf</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Freshly Baked, 16oz</p>
+<p class="font-headline-md text-headline-md text-primary mt-1">$6.50</p>
+</div>
+<div class="flex items-center gap-md sm:ml-auto w-full sm:w-auto justify-between sm:justify-end mt-4 sm:mt-0 pt-4 sm:pt-0 border-t border-outline-variant/30 sm:border-0">
+<div class="flex items-center border border-outline-variant rounded-lg bg-surface-container-lowest overflow-hidden h-9">
+<button aria-label="Decrease quantity" class="w-9 h-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="remove">remove</span>
+</button>
+<span class="w-10 text-center font-label-bold text-label-bold text-on-surface border-x border-outline-variant/50">1</span>
+<button aria-label="Increase quantity" class="w-9 h-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="add">add</span>
+</button>
+</div>
+<button aria-label="Remove item" class="w-9 h-9 flex items-center justify-center text-error hover:bg-error-container/50 rounded-lg transition-colors ml-2" title="Remove">
+<span class="material-symbols-outlined" data-icon="delete">delete</span>
+</button>
+</div>
+</article>
+</div>
+<div class="mt-4">
+<a class="inline-flex items-center gap-2 font-label-bold text-label-bold text-primary hover:opacity-80 transition-opacity" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="arrow_back">arrow_back</span>
+                    Continue Shopping
+                </a>
+</div>
+</section>
+<!-- Order Summary Sidebar (Right Column) -->
+<aside class="lg:col-span-4">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg shadow-[0_1px_2px_rgba(0,0,0,0.05)] sticky top-28 flex flex-col gap-md">
+<h2 class="font-headline-md text-headline-md text-on-surface border-b border-outline-variant/50 pb-sm">Order Summary</h2>
+<div class="flex flex-col gap-sm py-2">
+<div class="flex justify-between items-center font-body-lg text-body-lg text-on-surface-variant">
+<span>Subtotal (3 items)</span>
+<span class="text-on-surface">$17.39</span>
+</div>
+<div class="flex justify-between items-center font-body-lg text-body-lg text-on-surface-variant">
+<span>Delivery Fee</span>
+<span class="text-on-surface">$3.99</span>
+</div>
+<div class="flex justify-between items-center font-body-lg text-body-lg text-on-surface-variant">
+<span>Estimated Taxes</span>
+<span class="text-on-surface">$1.48</span>
+</div>
+</div>
+<div class="flex justify-between items-center font-headline-md text-headline-md text-on-surface border-t border-outline-variant/50 pt-md mt-sm">
+<span>Total</span>
+<span class="text-primary">$22.86</span>
+</div>
+<button class="w-full bg-primary text-on-primary rounded-lg py-3 mt-sm font-label-bold text-label-bold flex items-center justify-center gap-2 hover:opacity-90 transition-opacity focus:ring-2 focus:ring-primary-container focus:outline-none">
+                    Proceed to Checkout
+                    <span class="material-symbols-outlined text-[18px]" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<div class="flex items-start gap-2 mt-4 bg-surface-container-low p-3 rounded-lg border border-outline-variant/30">
+<span class="material-symbols-outlined text-primary text-[20px] mt-0.5" data-icon="verified_user">verified_user</span>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Secure checkout. Your data is encrypted and protected.</p>
+</div>
+</div>
+</aside>
+</main>
+<!-- Footer (Shared Component) -->
+<footer class="bg-primary dark:bg-primary-container text-on-primary dark:text-on-primary-container border-t border-outline-variant dark:border-outline mt-auto w-full">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-xl px-lg py-xl max-w-container-max mx-auto">
+<!-- Brand Column -->
+<div class="flex flex-col gap-sm">
+<div class="font-display-logo text-display-logo text-on-primary flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="local_mall">local_mall</span>
+                    Oyadeliver
+                </div>
+<p class="font-body-md text-body-md text-on-primary/70 mt-2 max-w-xs">
+                    Delivering fresh groceries and daily essentials directly to your doorstep.
+                </p>
+<p class="font-body-md text-body-md text-on-primary/50 mt-auto pt-4">
+                    © 2024 Oyadeliver. All rights reserved.
+                </p>
+</div>
+<!-- Links Column 1 -->
+<div class="flex flex-col gap-sm md:pl-12">
+<h4 class="font-label-bold text-label-bold text-on-primary mb-2">Company</h4>
+<a class="font-body-md text-body-md text-on-primary/50 dark:text-on-primary-container/50 hover:text-on-primary hover:opacity-100 transition-colors duration-200" href="#">About Us</a>
+<a class="font-body-md text-body-md text-on-primary/50 dark:text-on-primary-container/50 hover:text-on-primary hover:opacity-100 transition-colors duration-200" href="#">Careers</a>
+<a class="font-body-md text-body-md text-on-primary/50 dark:text-on-primary-container/50 hover:text-on-primary hover:opacity-100 transition-colors duration-200" href="#">Privacy Policy</a>
+</div>
+<!-- Links Column 2 -->
+<div class="flex flex-col gap-sm">
+<h4 class="font-label-bold text-label-bold text-on-primary mb-2">Support</h4>
+<a class="font-body-md text-body-md text-on-primary/50 dark:text-on-primary-container/50 hover:text-on-primary hover:opacity-100 transition-colors duration-200" href="#">Help Center</a>
+<a class="font-body-md text-body-md text-on-primary/50 dark:text-on-primary-container/50 hover:text-on-primary hover:opacity-100 transition-colors duration-200" href="#">Contact Us</a>
+<a class="font-body-md text-body-md text-on-primary/50 dark:text-on-primary-container/50 hover:text-on-primary hover:opacity-100 transition-colors duration-200" href="#">Social Media</a>
+</div>
+</div>
+</footer>
+</body></html>

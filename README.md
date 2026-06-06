@@ -1,13 +1,13 @@
 # Oya Deliver
 
-Grocery delivery platform built with React, Vite, Tailwind CSS, and **Firebase** (Auth + Firestore).
+Grocery delivery platform built with React, Vite, Tailwind CSS, and **Supabase** (Postgres) for backend data. Frontend auth can be provided by **Clerk** (optional). Firebase is supported as a legacy fallback in some components but the repository is being migrated to Supabase.
 
 ## Stack
 
 - React 19 + Vite
 - React Router v7
 - Tailwind CSS v4
-- Firebase Auth & Firestore
+- Supabase (Postgres) + Clerk (optional frontend auth)
 - react-hot-toast, react-icons
 
 ## Setup
@@ -15,27 +15,27 @@ Grocery delivery platform built with React, Vite, Tailwind CSS, and **Firebase**
 ```bash
 npm install
 cp .env.example .env
-# Add Firebase web app config from Firebase Console → Project settings
+# Add Supabase keys (VITE_SUPABASE_URL, VITE_SUPABASE_ANON_KEY) and optional Clerk publishable key
 npm run dev
 ```
 
-### Firebase
+### Supabase (recommended) and Clerk (optional frontend auth)
 
-1. Create a project at [Firebase Console](https://console.firebase.google.com).
-2. Enable **Authentication → Email/Password**.
-3. Create a **Firestore** database.
-4. Copy web app keys into `.env`.
-5. Create demo users (see `src/data/seedData.js`):
-   - `user@test.com` / `password123`
-   - `admin@oya.com` / `admin123`
+1. Create a project at https://app.supabase.com and get `SUPABASE_URL` and `SUPABASE_ANON_KEY`.
+2. Add the keys to your `.env` as `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY`.
+3. (Optional) Create a Clerk application for frontend auth and add `VITE_CLERK_PUBLISHABLE_KEY`.
+4. Create required tables using the migration SQL in `MIGRATE_TO_SUPABASE.md` or via the SQL editor in Supabase.
+5. Create demo users (see `src/data/seedData.js` or use the Supabase Auth panel).
 
-### Firestore collections (used by the app)
+### Database tables (Supabase / Postgres)
 
-| Collection | Document ID | Purpose |
-|------------|-------------|---------|
-| `users` | `{uid}` | Profile, address, role |
-| `carts` | `{uid}` | Cart line items |
-| `orders` | `{orderId}` | Orders & tracking status |
+| Table         | Primary Key                 | Purpose                                                 |
+| ------------- | --------------------------- | ------------------------------------------------------- |
+| `users`       | `id` (serial) or `clerk_id` | Profile, address, role (sync with Clerk via `clerk_id`) |
+| `carts`       | `id` (serial)               | Cart metadata (user_id, created_at)                     |
+| `cart_items`  | `id` (serial)               | Line items for carts (cart_id, product_id, qty, price)  |
+| `orders`      | `id` (serial)               | Orders & tracking status                                |
+| `order_items` | `id` (serial)               | Line items for orders                                   |
 
 Product catalog is loaded from `src/data/products.json` with prices in **Nigerian Naira (₦)**. Delivery fee is ₦1,500.
 

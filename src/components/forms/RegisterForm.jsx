@@ -4,7 +4,7 @@ import { FiEye, FiEyeOff } from "react-icons/fi";
 import toast from "react-hot-toast";
 import { useAuth } from "../../context/AuthContext";
 import { isEmail, required } from "../../utils/validate";
-import { firebaseConfigured } from "../../firebase/config";
+import { supabaseConfigured } from "../../supabase/client";
 
 const RegisterForm = () => {
   const { register } = useAuth();
@@ -84,12 +84,12 @@ const RegisterForm = () => {
 
   return (
     <div className="space-y-6">
-      {!firebaseConfigured && (
+      {!supabaseConfigured && (
         <div className="rounded-lg border border-oya-amber/30 bg-oya-amber/10 p-4 text-sm text-oya-teal">
-          Firebase is not configured. Copy{" "}
+          Backend is not configured. Copy{" "}
           <code className="rounded px-1 bg-slate-100">.env.example</code> to{" "}
           <code className="rounded px-1 bg-slate-100">.env</code> and set your
-          Firebase keys.
+          Supabase keys.
         </div>
       )}
 
@@ -107,7 +107,7 @@ const RegisterForm = () => {
             type="text"
             value={form.name}
             onChange={handleChange}
-            disabled={!firebaseConfigured || loading}
+            disabled={!supabaseConfigured || loading}
             className="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-oya-green focus:ring-2 focus:ring-oya-green/20"
             placeholder="Amina Yusuf"
           />
@@ -129,7 +129,7 @@ const RegisterForm = () => {
             type="email"
             value={form.email}
             onChange={handleChange}
-            disabled={!firebaseConfigured || loading}
+            disabled={!supabaseConfigured || loading}
             className="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-oya-green focus:ring-2 focus:ring-oya-green/20"
             placeholder="hello@example.com"
           />
@@ -151,7 +151,7 @@ const RegisterForm = () => {
             type="tel"
             value={form.phone}
             onChange={handleChange}
-            disabled={!firebaseConfigured || loading}
+            disabled={!supabaseConfigured || loading}
             className="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-oya-green focus:ring-2 focus:ring-oya-green/20"
             placeholder="0801 234 5678"
           />
@@ -174,7 +174,7 @@ const RegisterForm = () => {
               type={showPassword ? "text" : "password"}
               value={form.password}
               onChange={handleChange}
-              disabled={!firebaseConfigured || loading}
+              disabled={!supabaseConfigured || loading}
               className="w-full rounded-lg border border-slate-300 bg-white px-4 pr-12 py-3 text-sm text-slate-900 outline-none transition focus:border-oya-green focus:ring-2 focus:ring-oya-green/20"
               placeholder="At least 6 characters"
             />
@@ -210,7 +210,7 @@ const RegisterForm = () => {
               type={showConfirm ? "text" : "password"}
               value={form.confirmPassword}
               onChange={handleChange}
-              disabled={!firebaseConfigured || loading}
+              disabled={!supabaseConfigured || loading}
               className="w-full rounded-lg border border-slate-300 bg-white px-4 pr-12 py-3 text-sm text-slate-900 outline-none transition focus:border-oya-green focus:ring-2 focus:ring-oya-green/20"
               placeholder="Repeat your password"
             />
@@ -246,7 +246,7 @@ const RegisterForm = () => {
 
         <button
           type="submit"
-          disabled={!firebaseConfigured || loading}
+          disabled={!supabaseConfigured || loading}
           className="inline-flex w-full items-center justify-center rounded-lg bg-oya-teal px-5 py-3 text-sm font-semibold text-white transition hover:bg-oya-green disabled:cursor-not-allowed disabled:bg-slate-300"
         >
           {loading ? "Creating account…" : "Create account"}

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Oyadeliver - Payment</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-dim": "#dad9dd",
+                        "surface-container-low": "#f4f3f7",
+                        "surface-container-high": "#e9e7eb",
+                        "surface-container": "#eeedf1",
+                        "primary": "#022448",
+                        "surface-tint": "#455f87",
+                        "primary-fixed": "#d5e3ff",
+                        "on-surface-variant": "#43474e",
+                        "on-secondary": "#ffffff",
+                        "secondary-container": "#d6e0f4",
+                        "on-tertiary-fixed-variant": "#60410c",
+                        "on-background": "#1a1c1e",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed-dim": "#bdc7da",
+                        "tertiary": "#341f00",
+                        "outline-variant": "#c4c6cf",
+                        "on-primary-fixed": "#001c3b",
+                        "tertiary-fixed-dim": "#edbf7f",
+                        "surface-container-highest": "#e3e2e6",
+                        "on-primary-container": "#8aa4cf",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error": "#ffffff",
+                        "surface-variant": "#e3e2e6",
+                        "primary-container": "#1e3a5f",
+                        "on-surface": "#1a1c1e",
+                        "on-secondary-fixed-variant": "#3e4757",
+                        "on-tertiary-fixed": "#291800",
+                        "on-error-container": "#93000a",
+                        "secondary": "#555f70",
+                        "on-primary-fixed-variant": "#2d486d",
+                        "on-primary": "#ffffff",
+                        "inverse-on-surface": "#f1f0f4",
+                        "background": "#faf9fc",
+                        "inverse-surface": "#2f3033",
+                        "on-secondary-fixed": "#121c2a",
+                        "error-container": "#ffdad6",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed": "#ffddb2",
+                        "surface": "#faf9fc",
+                        "tertiary-container": "#503300",
+                        "on-secondary-container": "#5a6374",
+                        "outline": "#74777f",
+                        "inverse-primary": "#adc8f5",
+                        "secondary-fixed": "#d9e3f7",
+                        "on-tertiary-container": "#c69b5f",
+                        "primary-fixed-dim": "#adc8f5",
+                        "surface-bright": "#faf9fc",
+                        "leaf-green": "#4CAF50",
+                        "slate-blue": "#555f70",
+                        "warm-orange": "#FF9800",
+                        "parchment": "#F9F6EE"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem",
+                        "input": "8px"
+                    },
+                    "spacing": {
+                        "lg": "24px",
+                        "base": "8px",
+                        "gutter": "16px",
+                        "container-max": "1280px",
+                        "xl": "32px",
+                        "xs": "4px",
+                        "sm": "8px",
+                        "md": "16px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "display-logo": ["Plus Jakarta Sans"],
+                        "label-bold": ["Inter"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "display-logo": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-bold": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #F9F6EE; /* parchment */
+        }
+        .input-border {
+            border: 1px solid #E2E8F0;
+        }
+        .input-focus:focus-within {
+            border-color: #555f70;
+            outline: none;
+            box-shadow: none;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col font-body-md text-on-surface">
+<!-- TopNavBar (Transactional/Checkout flow typically suppresses standard nav, but user requested header from components. We will render it as a structural anchor, perhaps simplified) -->
+<!-- Applying explicit suppression rule for linear/transactional intent if strictly following semantic shell, but prompt says "Header and footer from {{DATA:COMPONENTS:COMPONENTS_9}}". Proceeding with generation. -->
+<header class="bg-primary dark:bg-primary-container text-on-primary dark:text-on-primary-container docked full-width top-0 border-b border-outline-variant dark:border-outline shadow-sm h-16 flex justify-between items-center px-lg w-full fixed z-50">
+<div class="font-display-logo text-display-logo text-on-primary dark:text-on-primary-container flex items-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">local_mall</span>
+            Oyadeliver
+        </div>
+<!-- Navigation hidden on checkout to focus on payment -->
+<nav class="hidden md:flex gap-lg">
+<a class="text-on-primary/70 dark:text-on-primary-container/70 hover:opacity-80 transition-opacity font-label-bold text-label-bold flex flex-col justify-center" href="#">Home</a>
+<a class="text-on-primary/70 dark:text-on-primary-container/70 hover:opacity-80 transition-opacity font-label-bold text-label-bold flex flex-col justify-center" href="#">Products</a>
+</nav>
+<div class="flex gap-md items-center">
+<button class="hover:opacity-80 transition-opacity text-on-primary/70 dark:text-on-primary-container/70 flex items-center justify-center p-sm">
+<span class="material-symbols-outlined">shopping_cart</span>
+</button>
+<button class="hover:opacity-80 transition-opacity text-on-primary/70 dark:text-on-primary-container/70 flex items-center justify-center p-sm">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow pt-24 pb-xl px-gutter md:px-lg w-full max-w-container-max mx-auto flex flex-col items-center justify-center">
+<div class="w-full max-w-md bg-surface-container-lowest border border-outline-variant shadow-[0_1px_2px_rgba(0,0,0,0.05)] rounded-lg p-lg">
+<div class="mb-lg">
+<h1 class="font-headline-md text-headline-md text-primary mb-sm">Secure Payment</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Complete your order for Oyadeliver.</p>
+</div>
+<form class="space-y-md">
+<!-- Accepted Cards Visual -->
+<div class="flex items-center gap-sm mb-md p-sm bg-surface-container-low rounded border border-outline-variant">
+<span class="material-symbols-outlined text-secondary">credit_card</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Accepted Cards</span>
+<div class="flex gap-xs ml-auto">
+<!-- Simulated card icons using CSS/spans for strict structural adherence -->
+<div class="w-8 h-5 bg-surface-tint rounded-sm flex items-center justify-center text-[8px] text-white font-bold tracking-tighter">VISA</div>
+<div class="w-8 h-5 bg-primary-container rounded-sm flex items-center justify-center text-[8px] text-white font-bold tracking-tighter">MC</div>
+</div>
+</div>
+<!-- Card Number -->
+<div class="flex flex-col gap-[4px]">
+<label class="font-label-bold text-label-bold text-on-surface" for="cardNumber">Card Number</label>
+<div class="relative flex items-center input-border rounded-input bg-surface-container-lowest input-focus">
+<span class="material-symbols-outlined absolute left-sm text-outline">credit_card</span>
+<input class="w-full bg-transparent border-none py-sm pl-[36px] pr-sm font-body-md text-body-md text-on-surface focus:ring-0 placeholder:text-outline-variant rounded-input" id="cardNumber" placeholder="0000 0000 0000 0000" type="text"/>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-md">
+<!-- Expiry -->
+<div class="flex flex-col gap-[4px]">
+<label class="font-label-bold text-label-bold text-on-surface" for="expiry">Expiry Date</label>
+<div class="flex items-center input-border rounded-input bg-surface-container-lowest input-focus">
+<input class="w-full bg-transparent border-none py-sm px-sm font-body-md text-body-md text-on-surface focus:ring-0 placeholder:text-outline-variant rounded-input" id="expiry" placeholder="MM/YY" type="text"/>
+</div>
+</div>
+<!-- CVV -->
+<div class="flex flex-col gap-[4px]">
+<label class="font-label-bold text-label-bold text-on-surface flex items-center gap-xs" for="cvv">
+                            CVV
+                            <span class="material-symbols-outlined text-[14px] text-outline cursor-help" title="3 digits on back of card">info</span>
+</label>
+<div class="flex items-center input-border rounded-input bg-surface-container-lowest input-focus">
+<input class="w-full bg-transparent border-none py-sm px-sm font-body-md text-body-md text-on-surface focus:ring-0 placeholder:text-outline-variant rounded-input" id="cvv" placeholder="123" type="text"/>
+</div>
+</div>
+</div>
+<!-- Name on Card -->
+<div class="flex flex-col gap-[4px]">
+<label class="font-label-bold text-label-bold text-on-surface" for="cardName">Name on Card</label>
+<div class="flex items-center input-border rounded-input bg-surface-container-lowest input-focus">
+<input class="w-full bg-transparent border-none py-sm px-sm font-body-md text-body-md text-on-surface focus:ring-0 placeholder:text-outline-variant rounded-input" id="cardName" placeholder="Full Name" type="text"/>
+</div>
+</div>
+<div class="pt-sm flex flex-col gap-sm">
+<button class="w-full bg-[#4CAF50] text-white font-label-bold text-label-bold py-md rounded-[4px] flex items-center justify-center gap-sm hover:opacity-90 transition-opacity shadow-[0_1px_2px_rgba(0,0,0,0.05)]" type="button">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">lock</span>
+                        Pay Now
+                    </button>
+<button class="w-full bg-[#555f70] text-white font-label-bold text-label-bold py-[10px] rounded-[4px] flex items-center justify-center hover:opacity-90 transition-opacity" type="button">
+                        Cancel
+                    </button>
+</div>
+<div class="flex items-center justify-center gap-xs text-outline mt-sm">
+<span class="material-symbols-outlined text-[16px]">verified_user</span>
+<span class="font-label-sm text-label-sm">Payments are secure and encrypted.</span>
+</div>
+</form>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-primary dark:bg-primary-container text-on-primary dark:text-on-primary-container full-width bottom-0 border-t border-outline-variant dark:border-outline">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-xl px-lg py-xl max-w-container-max mx-auto">
+<div class="font-display-logo text-display-logo text-on-primary">
+                Oyadeliver
+            </div>
+<div class="flex flex-col gap-sm">
+<a class="font-body-md text-body-md text-on-primary/50 dark:text-on-primary-container/50 hover:text-on-primary hover:opacity-100 transition-colors duration-200" href="#">About Us</a>
+<a class="font-body-md text-body-md text-on-primary/50 dark:text-on-primary-container/50 hover:text-on-primary hover:opacity-100 transition-colors duration-200" href="#">Help Center</a>
+<a class="font-body-md text-body-md text-on-primary/50 dark:text-on-primary-container/50 hover:text-on-primary hover:opacity-100 transition-colors duration-200" href="#">Social Media</a>
+</div>
+<div class="font-body-md text-body-md text-on-primary/50 flex items-end md:justify-end">
+                © 2024 Oyadeliver. All rights reserved.
+            </div>
+</div>
+</footer>
+</body></html>

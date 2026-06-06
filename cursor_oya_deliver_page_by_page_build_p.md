@@ -1,5 +1,5 @@
 # Oya Deliver page-by-page build plan
-_Exported on 05/06/2026 at 16:47:07 GMT+1 from Cursor (3.6.31)_
+_Exported on 06/06/2026 at 20:37:08 GMT+1 from Cursor (3.7.12)_
 
 ---
 
@@ -610,4 +610,8 @@ Build passes. Say **continue** when you want Phase 3 (Product Detail Page), or a
 i  want 15 commits to have interval like shorter interval after less strenious work
 
 continue
+
+can you access the google stitch mcp?
+
+.
 

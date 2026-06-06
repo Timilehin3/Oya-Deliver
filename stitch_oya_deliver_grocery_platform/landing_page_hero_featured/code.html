@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Oyadeliver - Fresh groceries delivered in 30 mins</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-surface": "#2f3033",
+                        "secondary": "#555f70",
+                        "on-primary-container": "#8aa4cf",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#adc8f5",
+                        "surface": "#faf9fc",
+                        "tertiary-fixed-dim": "#edbf7f",
+                        "on-tertiary-fixed-variant": "#60410c",
+                        "background": "#F9F6EE", /* Adjusted to match parchment requested */
+                        "on-primary-fixed": "#001c3b",
+                        "surface-tint": "#455f87",
+                        "on-surface-variant": "#43474e",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-low": "#f4f3f7",
+                        "primary-fixed": "#d5e3ff",
+                        "error-container": "#ffdad6",
+                        "primary": "#1E3A5F", /* Slate Blue from prompt */
+                        "on-tertiary-container": "#c69b5f",
+                        "surface-container-high": "#e9e7eb",
+                        "primary-fixed-dim": "#adc8f5",
+                        "error": "#ba1a1a",
+                        "surface-container": "#eeedf1",
+                        "outline": "#74777f",
+                        "outline-variant": "#c4c6cf",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-container": "#1e3a5f",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed": "#d9e3f7",
+                        "surface-bright": "#faf9fc",
+                        "on-surface": "#1a1c1e",
+                        "on-primary-fixed-variant": "#2d486d",
+                        "tertiary-fixed": "#ffddb2",
+                        "on-primary": "#ffffff",
+                        "surface-dim": "#dad9dd",
+                        "on-secondary-fixed": "#121c2a",
+                        "on-secondary": "#ffffff",
+                        "secondary-container": "#d6e0f4",
+                        "inverse-on-surface": "#f1f0f4",
+                        "tertiary-container": "#503300",
+                        "secondary-fixed-dim": "#bdc7da",
+                        "on-background": "#1E3A5F", /* Adjusted for prompt */
+                        "on-secondary-fixed-variant": "#3e4757",
+                        "surface-variant": "#e3e2e6",
+                        "tertiary": "#341f00",
+                        "on-tertiary-fixed": "#291800",
+                        "on-secondary-container": "#5a6374",
+                        "surface-container-highest": "#e3e2e6",
+                        "success": "#4CAF50" /* Leaf Green from prompt */
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "lg": "24px",
+                        "md": "16px",
+                        "container-max": "1280px",
+                        "base": "8px",
+                        "xs": "4px",
+                        "xl": "32px",
+                        "sm": "8px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "display-logo": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "label-bold": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "display-logo": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "label-bold": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #F9F6EE; color: #1E3A5F; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="font-body-md antialiased min-h-screen flex flex-col pt-16">
+<!-- TopNavBar -->
+<header class="bg-primary dark:bg-primary-container h-16 flex justify-between items-center px-lg w-full fixed top-0 z-50 border-b border-outline-variant dark:border-outline shadow-sm">
+<div class="flex items-center gap-xl">
+<a class="font-display-logo text-display-logo text-on-primary dark:text-on-primary-container flex items-center gap-2" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">storefront</span>
+                Oyadeliver
+            </a>
+<nav class="hidden md:flex gap-lg">
+<a class="text-on-primary font-bold border-b-2 border-on-primary pb-1 hover:opacity-80 transition-opacity" href="#">Home</a>
+<a class="text-on-primary/70 dark:text-on-primary-container/70 hover:opacity-80 transition-opacity font-label-bold text-label-bold" href="#">Products</a>
+</nav>
+</div>
+<div class="flex-1 max-w-md mx-lg hidden md:block">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full bg-surface-container-highest/20 border border-outline-variant rounded-DEFAULT py-2 pl-10 pr-4 text-on-primary placeholder:text-on-primary/50 focus:border-on-primary focus:ring-0 font-body-md text-body-md" placeholder="Search..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<button class="text-on-primary hover:opacity-80 transition-opacity active:scale-95 duration-150">
+<span class="material-symbols-outlined">shopping_cart</span>
+</button>
+<button class="text-on-primary hover:opacity-80 transition-opacity active:scale-95 duration-150">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</header>
+<main class="flex-grow">
+<!-- Hero Section -->
+<section class="py-xl px-lg md:py-16 text-center max-w-container-max mx-auto flex flex-col items-center justify-center min-h-[50vh]">
+<img alt="Oyadeliver Bird Logo" class="w-48 h-auto mb-lg object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2Bml244-vmVRLLoVnsV7Yh6RYhT3siH_M6tEePsb8-00P4hDo7SfrlGwQ3Jg-e-0H9i09nS0fBruNaNfa3rxC1LP7wyGmcsWWRimm1pgNMU4ApsQDd9I0JAHP-LxdDoPi9N8mFfXyTtmCYR3z_DI-IKOBJNTSWnwYLMZ6AiUaVlJTm8MF-wqWNU8jY2BgpLnGcqD_L-I3d3z2K74M2uT6VUE-JkA8dgGXU2jffVgfBsU18dF07xTaV5mdBof8QodyXHljTduCgLbZ"/>
+<h1 class="font-headline-lg text-headline-lg md:text-[48px] md:leading-[56px] text-primary mb-md max-w-2xl">
+                Fresh groceries delivered in 30 mins
+            </h1>
+<!-- Main Search -->
+<div class="w-full max-w-xl mx-auto mt-lg relative shadow-[0_1px_2px_rgba(0,0,0,0.05)] rounded-lg">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-primary/60 text-[24px]">search</span>
+<input class="w-full bg-surface-container-lowest border border-[#E2E8F0] rounded-lg py-4 pl-12 pr-4 text-primary placeholder:text-primary/50 focus:border-primary focus:ring-1 focus:ring-primary font-body-lg text-body-lg transition-colors" placeholder="Search for milk, bread, or fruits..." type="text"/>
+</div>
+</section>
+<!-- Categories -->
+<section class="py-xl px-lg max-w-container-max mx-auto border-t border-[#E2E8F0]">
+<h2 class="font-headline-md text-headline-md text-primary mb-lg">Shop by Category</h2>
+<div class="flex overflow-x-auto hide-scrollbar gap-md pb-sm">
+<!-- Category Item -->
+<a class="flex-shrink-0 flex flex-col items-center justify-center w-24 h-24 bg-surface-container-lowest border border-[#E2E8F0] rounded-lg hover:shadow-[0_1px_2px_rgba(0,0,0,0.05)] transition-shadow" href="#">
+<span class="material-symbols-outlined text-primary text-[32px] mb-sm">nutrition</span>
+<span class="font-label-bold text-label-bold text-primary">Fruits</span>
+</a>
+<a class="flex-shrink-0 flex flex-col items-center justify-center w-24 h-24 bg-surface-container-lowest border border-[#E2E8F0] rounded-lg hover:shadow-[0_1px_2px_rgba(0,0,0,0.05)] transition-shadow" href="#">
+<span class="material-symbols-outlined text-primary text-[32px] mb-sm">eco</span>
+<span class="font-label-bold text-label-bold text-primary">Vegetables</span>
+</a>
+<a class="flex-shrink-0 flex flex-col items-center justify-center w-24 h-24 bg-surface-container-lowest border border-[#E2E8F0] rounded-lg hover:shadow-[0_1px_2px_rgba(0,0,0,0.05)] transition-shadow" href="#">
+<span class="material-symbols-outlined text-primary text-[32px] mb-sm">water_drop</span>
+<span class="font-label-bold text-label-bold text-primary">Dairy</span>
+</a>
+<a class="flex-shrink-0 flex flex-col items-center justify-center w-24 h-24 bg-surface-container-lowest border border-[#E2E8F0] rounded-lg hover:shadow-[0_1px_2px_rgba(0,0,0,0.05)] transition-shadow" href="#">
+<span class="material-symbols-outlined text-primary text-[32px] mb-sm">bakery_dining</span>
+<span class="font-label-bold text-label-bold text-primary">Bakery</span>
+</a>
+<a class="flex-shrink-0 flex flex-col items-center justify-center w-24 h-24 bg-surface-container-lowest border border-[#E2E8F0] rounded-lg hover:shadow-[0_1px_2px_rgba(0,0,0,0.05)] transition-shadow" href="#">
+<span class="material-symbols-outlined text-primary text-[32px] mb-sm">set_meal</span>
+<span class="font-label-bold text-label-bold text-primary">Meat</span>
+</a>
+</div>
+</section>
+<!-- Featured Products -->
+<section class="py-xl px-lg max-w-container-max mx-auto">
+<div class="flex justify-between items-center mb-lg">
+<h2 class="font-headline-md text-headline-md text-primary">Featured Deals</h2>
+<a class="font-label-bold text-label-bold text-primary hover:underline" href="#">View All</a>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-md">
+<!-- Product Card 1 -->
+<div class="bg-surface-container-lowest border border-[#E2E8F0] rounded-lg overflow-hidden hover:shadow-[0_1px_2px_rgba(0,0,0,0.05)] transition-shadow group flex flex-col">
+<div class="relative pt-[100%] bg-surface-container-low border-b border-[#E2E8F0]">
+<img alt="Product" class="absolute inset-0 w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBomHc0s3hNvmfqTvfvAQGDwo4Y_hXDN9D7Qp13IUE8djAvJOUo52u2hd2GSz66kXFtJnQ73MMws0JiX15FQr2wN0BDBFxOGatwO0xLXWVuVMUNDtRi57pjkHlgpqFPp6XcKFlEJAAI8HhZqmQRcClg0Ysjm9rihy_bNb3CIRRYMWcSD6SKgKlOrTMH0a9ZRpp8SXjaeyRjdZvyDE1kXbmZWWjTBAgqksLaWhlK-auYK-YHm0vCJFOlkaOqG0RJV5lke4AqNzMrPxm"/>
+<span class="absolute top-2 left-2 bg-[#FF9800] text-white font-label-bold text-[10px] px-2 py-1 rounded-full">20% OFF</span>
+</div>
+<div class="p-3 flex flex-col flex-grow">
+<h3 class="font-body-md text-body-md text-primary truncate mb-1">Organic Bananas (1kg)</h3>
+<p class="font-headline-md text-headline-md text-primary mb-3 mt-auto">$2.49 <span class="text-outline text-body-md line-through ml-1">$3.10</span></p>
+<button class="w-full bg-success text-white font-label-bold text-label-bold py-2 rounded-DEFAULT hover:bg-success/90 transition-colors flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[16px]">add_shopping_cart</span> Add
+                        </button>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="bg-surface-container-lowest border border-[#E2E8F0] rounded-lg overflow-hidden hover:shadow-[0_1px_2px_rgba(0,0,0,0.05)] transition-shadow group flex flex-col">
+<div class="relative pt-[100%] bg-surface-container-low border-b border-[#E2E8F0]">
+<img alt="Product" class="absolute inset-0 w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBomHc0s3hNvmfqTvfvAQGDwo4Y_hXDN9D7Qp13IUE8djAvJOUo52u2hd2GSz66kXFtJnQ73MMws0JiX15FQr2wN0BDBFxOGatwO0xLXWVuVMUNDtRi57pjkHlgpqFPp6XcKFlEJAAI8HhZqmQRcClg0Ysjm9rihy_bNb3CIRRYMWcSD6SKgKlOrTMH0a9ZRpp8SXjaeyRjdZvyDE1kXbmZWWjTBAgqksLaWhlK-auYK-YHm0vCJFOlkaOqG0RJV5lke4AqNzMrPxm"/>
+</div>
+<div class="p-3 flex flex-col flex-grow">
+<h3 class="font-body-md text-body-md text-primary truncate mb-1">Whole Wheat Bread</h3>
+<p class="font-headline-md text-headline-md text-primary mb-3 mt-auto">$3.99</p>
+<button class="w-full bg-success text-white font-label-bold text-label-bold py-2 rounded-DEFAULT hover:bg-success/90 transition-colors flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[16px]">add_shopping_cart</span> Add
+                        </button>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="bg-surface-container-lowest border border-[#E2E8F0] rounded-lg overflow-hidden hover:shadow-[0_1px_2px_rgba(0,0,0,0.05)] transition-shadow group flex flex-col">
+<div class="relative pt-[100%] bg-surface-container-low border-b border-[#E2E8F0]">
+<img alt="Product" class="absolute inset-0 w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBomHc0s3hNvmfqTvfvAQGDwo4Y_hXDN9D7Qp13IUE8djAvJOUo52u2hd2GSz66kXFtJnQ73MMws0JiX15FQr2wN0BDBFxOGatwO0xLXWVuVMUNDtRi57pjkHlgpqFPp6XcKFlEJAAI8HhZqmQRcClg0Ysjm9rihy_bNb3CIRRYMWcSD6SKgKlOrTMH0a9ZRpp8SXjaeyRjdZvyDE1kXbmZWWjTBAgqksLaWhlK-auYK-YHm0vCJFOlkaOqG0RJV5lke4AqNzMrPxm"/>
+</div>
+<div class="p-3 flex flex-col flex-grow">
+<h3 class="font-body-md text-body-md text-primary truncate mb-1">Fresh Farm Eggs (12)</h3>
+<p class="font-headline-md text-headline-md text-primary mb-3 mt-auto">$4.50</p>
+<button class="w-full bg-success text-white font-label-bold text-label-bold py-2 rounded-DEFAULT hover:bg-success/90 transition-colors flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[16px]">add_shopping_cart</span> Add
+                        </button>
+</div>
+</div>
+<!-- Product Card 4 -->
+<div class="bg-surface-container-lowest border border-[#E2E8F0] rounded-lg overflow-hidden hover:shadow-[0_1px_2px_rgba(0,0,0,0.05)] transition-shadow group flex flex-col">
+<div class="relative pt-[100%] bg-surface-container-low border-b border-[#E2E8F0]">
+<img alt="Product" class="absolute inset-0 w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBomHc0s3hNvmfqTvfvAQGDwo4Y_hXDN9D7Qp13IUE8djAvJOUo52u2hd2GSz66kXFtJnQ73MMws0JiX15FQr2wN0BDBFxOGatwO0xLXWVuVMUNDtRi57pjkHlgpqFPp6XcKFlEJAAI8HhZqmQRcClg0Ysjm9rihy_bNb3CIRRYMWcSD6SKgKlOrTMH0a9ZRpp8SXjaeyRjdZvyDE1kXbmZWWjTBAgqksLaWhlK-auYK-YHm0vCJFOlkaOqG0RJV5lke4AqNzMrPxm"/>
+</div>
+<div class="p-3 flex flex-col flex-grow">
+<h3 class="font-body-md text-body-md text-primary truncate mb-1">Avocado Hass</h3>
+<p class="font-headline-md text-headline-md text-primary mb-3 mt-auto">$1.20 <span class="text-outline text-body-md font-normal">/ea</span></p>
+<button class="w-full bg-success text-white font-label-bold text-label-bold py-2 rounded-DEFAULT hover:bg-success/90 transition-colors flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[16px]">add_shopping_cart</span> Add
+                        </button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-primary dark:bg-primary-container text-on-primary dark:text-on-primary-container full-width bottom-0 border-t border-outline-variant dark:border-outline mt-auto">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-xl px-lg py-xl max-w-container-max mx-auto">
+<div class="flex flex-col gap-md">
+<span class="font-display-logo text-display-logo text-on-primary flex items-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">storefront</span>
+                    Oyadeliver
+                </span>
+<p class="font-body-md text-body-md text-on-primary/70">Fresh groceries delivered fast. Quality you can trust, straight to your door.</p>
+</div>
+<div class="flex flex-col gap-sm">
+<h4 class="font-label-bold text-label-bold text-on-primary uppercase tracking-wider mb-2">Company</h4>
+<a class="font-body-md text-body-md text-on-primary/50 dark:text-on-primary-container/50 hover:text-on-primary hover:opacity-100 transition-colors duration-200" href="#">About Us</a>
+<a class="font-body-md text-body-md text-on-primary/50 dark:text-on-primary-container/50 hover:text-on-primary hover:opacity-100 transition-colors duration-200" href="#">Help Center</a>
+<a class="font-body-md text-body-md text-on-primary/50 dark:text-on-primary-container/50 hover:text-on-primary hover:opacity-100 transition-colors duration-200" href="#">Social Media</a>
+</div>
+<div class="flex flex-col gap-sm justify-end items-start md:items-end md:text-right mt-md md:mt-0">
+<p class="font-body-md text-body-md text-on-primary/50">© 2024 Oyadeliver. All rights reserved.</p>
+</div>
+</div>
+</footer>
+</body></html>

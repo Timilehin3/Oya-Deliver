@@ -1,5 +1,5 @@
-/** @deprecated Prefer Firebase; kept for non-sensitive UI prefs only */
-import { useState, useEffect } from 'react';
+/** @deprecated Prefer Supabase; kept for non-sensitive UI prefs only */
+import { useState, useEffect } from "react";
 
 export function useLocalStorage(key, initialValue) {
   const [stored, setStored] = useState(() => {

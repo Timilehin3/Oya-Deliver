@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import RegisterForm from "../components/forms/RegisterForm";
-import { SignUpButton } from '@clerk/clerk-react';
+import { SignUpButton } from "@clerk/clerk-react";
 
 const clerkConfigured = Boolean(import.meta.env.VITE_CLERK_PUBLISHABLE_KEY);
 
@@ -23,8 +23,7 @@ const RegisterPage = () => (
 
         <div className="grid gap-4 rounded-lg border border-slate-200 bg-oya-paper p-5 text-sm text-slate-700">
           <p>
-            We use Firebase auth for secure login and Firestore for your account
-            profile.
+            We use Clerk for authentication and Supabase for account profiles.
           </p>
           <p>Already registered? Kindly sign in instead.</p>
         </div>
@@ -40,9 +39,13 @@ const RegisterPage = () => (
           </p>
           {clerkConfigured ? (
             <div className="space-y-4">
-              <p className="text-sm text-slate-600">Create an account using Clerk (recommended).</p>
+              <p className="text-sm text-slate-600">
+                Create an account using Clerk (recommended).
+              </p>
               <SignUpButton>
-                <button className="w-full rounded-lg bg-oya-teal text-white py-2">Sign up with Clerk</button>
+                <button className="w-full rounded-lg bg-oya-teal text-white py-2">
+                  Sign up with Clerk
+                </button>
               </SignUpButton>
             </div>
           ) : (

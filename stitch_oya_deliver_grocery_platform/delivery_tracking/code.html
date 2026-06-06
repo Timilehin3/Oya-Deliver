@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Oyadeliver - Delivery Tracking</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-dim": "#dad9dd",
+                        "surface-container-low": "#f4f3f7",
+                        "surface-container-high": "#e9e7eb",
+                        "surface-container": "#eeedf1",
+                        "primary": "#022448",
+                        "surface-tint": "#455f87",
+                        "primary-fixed": "#d5e3ff",
+                        "on-surface-variant": "#43474e",
+                        "on-secondary": "#ffffff",
+                        "secondary-container": "#d6e0f4",
+                        "on-tertiary-fixed-variant": "#60410c",
+                        "on-background": "#1a1c1e",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed-dim": "#bdc7da",
+                        "tertiary": "#341f00",
+                        "outline-variant": "#c4c6cf",
+                        "on-primary-fixed": "#001c3b",
+                        "tertiary-fixed-dim": "#edbf7f",
+                        "surface-container-highest": "#e3e2e6",
+                        "on-primary-container": "#8aa4cf",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error": "#ffffff",
+                        "surface-variant": "#e3e2e6",
+                        "primary-container": "#1e3a5f",
+                        "on-surface": "#1a1c1e",
+                        "on-secondary-fixed-variant": "#3e4757",
+                        "on-tertiary-fixed": "#291800",
+                        "on-error-container": "#93000a",
+                        "secondary": "#555f70",
+                        "on-primary-fixed-variant": "#2d486d",
+                        "on-primary": "#ffffff",
+                        "inverse-on-surface": "#f1f0f4",
+                        "background": "#faf9fc",
+                        "inverse-surface": "#2f3033",
+                        "on-secondary-fixed": "#121c2a",
+                        "error-container": "#ffdad6",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed": "#ffddb2",
+                        "surface": "#faf9fc",
+                        "tertiary-container": "#503300",
+                        "on-secondary-container": "#5a6374",
+                        "outline": "#74777f",
+                        "inverse-primary": "#adc8f5",
+                        "secondary-fixed": "#d9e3f7",
+                        "on-tertiary-container": "#c69b5f",
+                        "primary-fixed-dim": "#adc8f5",
+                        "surface-bright": "#faf9fc"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "lg": "24px",
+                        "base": "8px",
+                        "gutter": "16px",
+                        "container-max": "1280px",
+                        "xl": "32px",
+                        "xs": "4px",
+                        "sm": "8px",
+                        "md": "16px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "display-logo": ["Plus Jakarta Sans"],
+                        "label-bold": ["Inter"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "display-logo": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-bold": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="h-16 flex justify-between items-center px-lg w-full fixed top-0 z-50 bg-primary border-b border-outline-variant shadow-sm docked full-width top-0">
+<div class="flex items-center gap-2">
+<span class="font-display-logo text-display-logo text-on-primary">Oyadeliver</span>
+</div>
+<nav class="hidden md:flex gap-lg items-center">
+<!-- Delivery Tracking is a specific transactional page, neither generic tab is active -->
+<a class="font-label-bold text-label-bold text-on-primary/70 hover:opacity-80 transition-opacity" href="#">Home</a>
+<a class="font-label-bold text-label-bold text-on-primary/70 hover:opacity-80 transition-opacity" href="#">Products</a>
+</nav>
+<div class="flex items-center gap-md text-on-primary">
+<button class="hover:opacity-80 transition-opacity flex items-center justify-center w-8 h-8 rounded-full">
+<span class="material-symbols-outlined">shopping_cart</span>
+</button>
+<button class="hover:opacity-80 transition-opacity flex items-center justify-center w-8 h-8 rounded-full">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow mt-16 px-gutter md:px-lg py-xl max-w-container-max mx-auto w-full">
+<div class="mb-lg flex flex-col gap-sm">
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-background">Track Your Order</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Order #OD-98245</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-lg">
+<!-- Left Column: Status & Map -->
+<div class="md:col-span-7 flex flex-col gap-lg">
+<!-- ETA Card -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg shadow-sm">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-md mb-lg border-b border-outline-variant pb-md">
+<div>
+<p class="font-label-bold text-label-bold text-on-surface-variant uppercase tracking-wider mb-xs">Estimated Delivery</p>
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary">2:45 PM</h2>
+</div>
+<div class="bg-surface-container-low px-md py-sm rounded-lg border border-outline-variant flex items-center gap-sm">
+<span class="material-symbols-outlined text-tertiary-fixed-dim" style="font-variation-settings: 'FILL' 1;">timer</span>
+<span class="font-label-bold text-label-bold text-on-surface">Arriving in 15 mins</span>
+</div>
+</div>
+<!-- Stepper -->
+<div class="relative py-sm pl-md">
+<!-- Vertical Line -->
+<div class="absolute left-6 top-6 bottom-6 w-[2px] bg-outline-variant"></div>
+<div class="absolute left-6 top-6 bottom-[40%] w-[2px] bg-tertiary-fixed-dim"></div>
+<!-- Step 1: Confirmed -->
+<div class="relative flex items-start gap-md mb-xl">
+<div class="w-6 h-6 rounded-full bg-tertiary-fixed-dim border-2 border-surface-container-lowest flex items-center justify-center z-10 shrink-0">
+<span class="material-symbols-outlined text-[14px] text-on-tertiary" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div class="pt-1">
+<p class="font-label-bold text-label-bold text-on-background">Order Confirmed</p>
+<p class="font-body-md text-body-md text-on-surface-variant mt-xs">1:15 PM</p>
+</div>
+</div>
+<!-- Step 2: Preparing -->
+<div class="relative flex items-start gap-md mb-xl">
+<div class="w-6 h-6 rounded-full bg-tertiary-fixed-dim border-2 border-surface-container-lowest flex items-center justify-center z-10 shrink-0">
+<span class="material-symbols-outlined text-[14px] text-on-tertiary" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div class="pt-1">
+<p class="font-label-bold text-label-bold text-on-background">Preparing</p>
+<p class="font-body-md text-body-md text-on-surface-variant mt-xs">1:30 PM - Shopper is picking your items</p>
+</div>
+</div>
+<!-- Step 3: Out for Delivery (Active) -->
+<div class="relative flex items-start gap-md mb-xl">
+<div class="w-6 h-6 rounded-full bg-tertiary-fixed-dim border-2 border-surface-container-lowest flex items-center justify-center z-10 shrink-0 shadow-[0_0_0_4px_rgba(237,191,127,0.2)]">
+<div class="w-2 h-2 rounded-full bg-on-tertiary"></div>
+</div>
+<div class="pt-1">
+<p class="font-headline-md text-headline-md text-primary mb-xs">Out for Delivery</p>
+<p class="font-body-md text-body-md text-on-surface-variant">2:10 PM - Driver is on the way to your address.</p>
+</div>
+</div>
+<!-- Step 4: Delivered -->
+<div class="relative flex items-start gap-md">
+<div class="w-6 h-6 rounded-full bg-surface-container-highest border-2 border-surface-container-lowest flex items-center justify-center z-10 shrink-0">
+</div>
+<div class="pt-1">
+<p class="font-label-bold text-label-bold text-outline">Delivered</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Map Placeholder -->
+<div class="bg-surface-container border border-outline-variant rounded-lg overflow-hidden h-64 relative">
+<img alt="Map" class="w-full h-full object-cover opacity-80 mix-blend-multiply" data-alt="A stylized, modern top-down map interface showing a delivery route in a city. The map uses a sophisticated color palette of light parchment and slate blue, matching a corporate modern aesthetic. A brightly colored path indicates the route, ending at a destination pin." data-location="City Map" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3FyTAjzetTeYISxfmwcHlbSqm1rtpHR_P8A804Z4SEKBYa_IiGBo0wfV_sXYz8hXyhhSa-mp7Q8qTlzrkvFXljTt-A55r8X9UVTMIbDCBKsSL7cm5cSc4319LYsFjzEbtZbZVbuDSt7SqUEXa-Ybn-1SMmKogMb9OpJZjYJ4_7TKNWFSERNAS84G51MFxzcwc1yAymRoifM2jUVB5VfAAT4fe3eo4BzD4zj_J0khn-Q5eyyi5Z1r2FV_kvjJYdSKgQjYIhVIuDtlG"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container/80 to-transparent"></div>
+<!-- Driver Info Pill -->
+<div class="absolute bottom-md left-md right-md bg-surface-container-lowest border border-outline-variant rounded-lg p-md shadow-sm flex items-center justify-between">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded-full bg-surface-dim overflow-hidden">
+<img alt="Driver" class="w-full h-full object-cover" data-alt="A close-up portrait of a friendly delivery driver wearing a slate blue uniform cap. The lighting is soft and natural, emphasizing a reliable and approachable mood. The background is slightly blurred out to focus on the driver's face." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD58FrMz1cOPF9cJu9Vn_uHZy4JqPfljCWOwfXro5BL4t7TtWjGQp1YOtSY24JQ37FTCLfVU3AR5vUnaMbLkg45L3NqeAtNNHWXfMqPrhhp34jIfi4eSSNREjx6HtgOqX0uZWmL0QKgrGxQROI9DCsyy1oq91JAXMlIiEJi4jkl6g0gEED-dyHw24wguzKYXSJ2xwtzC4TolnLnTKeTBkM2cDIpGW-D45frvPUoF35whjUEmYuKYvAXvOBceSshja4hITcaEwTaNXqd"/>
+</div>
+<div>
+<p class="font-label-bold text-label-bold text-on-background">Michael T.</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">star</span> 4.9 (120+ deliveries)
+                                </p>
+</div>
+</div>
+<button class="bg-surface-container-high text-on-surface p-sm rounded-lg hover:bg-surface-dim transition-colors border border-outline-variant">
+<span class="material-symbols-outlined">chat</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Right Column: Order Details -->
+<div class="md:col-span-5">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg shadow-sm sticky top-24">
+<h3 class="font-headline-md text-headline-md text-on-background border-b border-outline-variant pb-sm mb-md">Delivery Details</h3>
+<div class="mb-lg">
+<p class="font-label-bold text-label-bold text-on-surface-variant mb-xs">Delivery Address</p>
+<p class="font-body-md text-body-md text-on-background">123 Corporate Blvd, Suite 400<br/>Metropolis, NY 10001</p>
+<p class="font-label-sm text-label-sm text-outline mt-xs">Instructions: Leave at reception.</p>
+</div>
+<h4 class="font-label-bold text-label-bold text-on-surface-variant mb-sm">Order Summary (4 items)</h4>
+<div class="flex flex-col gap-sm mb-lg">
+<div class="flex justify-between items-start">
+<span class="font-body-md text-body-md text-on-background">2x Organic Avocados</span>
+<span class="font-body-md text-body-md text-on-background font-medium">$4.98</span>
+</div>
+<div class="flex justify-between items-start">
+<span class="font-body-md text-body-md text-on-background">1x Whole Milk (1 Gallon)</span>
+<span class="font-body-md text-body-md text-on-background font-medium">$3.50</span>
+</div>
+<div class="flex justify-between items-start">
+<span class="font-body-md text-body-md text-on-background">1x Sourdough Bread</span>
+<span class="font-body-md text-body-md text-on-background font-medium">$5.20</span>
+</div>
+</div>
+<div class="border-t border-outline-variant pt-md flex justify-between items-center">
+<span class="font-headline-md text-headline-md text-on-background">Total</span>
+<span class="font-headline-md text-headline-md text-primary">$13.68</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-primary border-t border-outline-variant full-width bottom-0 mt-auto">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-xl px-lg py-xl max-w-container-max mx-auto text-on-primary">
+<div class="flex flex-col gap-md">
+<span class="font-display-logo text-display-logo text-on-primary">Oyadeliver</span>
+<p class="font-body-md text-body-md text-on-primary/70">© 2024 Oyadeliver. All rights reserved.</p>
+</div>
+<div class="flex flex-col gap-md">
+<a class="font-label-bold text-label-bold text-on-primary/50 hover:text-on-primary hover:opacity-100 transition-colors duration-200" href="#">About Us</a>
+<a class="font-label-bold text-label-bold text-on-primary/50 hover:text-on-primary hover:opacity-100 transition-colors duration-200" href="#">Help Center</a>
+<a class="font-label-bold text-label-bold text-on-primary/50 hover:text-on-primary hover:opacity-100 transition-colors duration-200" href="#">Social Media</a>
+</div>
+<div class="flex items-end justify-start md:justify-end">
+<!-- Optional 3rd column content or empty to balance grid as per JSON -->
+</div>
+</div>
+</footer>
+</body></html>

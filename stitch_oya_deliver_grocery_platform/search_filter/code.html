@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Oyadeliver - Search &amp; Filter</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-dim": "#dad9dd",
+                        "surface-container-low": "#f4f3f7",
+                        "surface-container-high": "#e9e7eb",
+                        "surface-container": "#eeedf1",
+                        "primary": "#022448",
+                        "surface-tint": "#455f87",
+                        "primary-fixed": "#d5e3ff",
+                        "on-surface-variant": "#43474e",
+                        "on-secondary": "#ffffff",
+                        "secondary-container": "#d6e0f4",
+                        "on-tertiary-fixed-variant": "#60410c",
+                        "on-background": "#1a1c1e",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed-dim": "#bdc7da",
+                        "tertiary": "#341f00",
+                        "outline-variant": "#c4c6cf",
+                        "on-primary-fixed": "#001c3b",
+                        "tertiary-fixed-dim": "#edbf7f",
+                        "surface-container-highest": "#e3e2e6",
+                        "on-primary-container": "#8aa4cf",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error": "#ffffff",
+                        "surface-variant": "#e3e2e6",
+                        "primary-container": "#1e3a5f",
+                        "on-surface": "#1a1c1e",
+                        "on-secondary-fixed-variant": "#3e4757",
+                        "on-tertiary-fixed": "#291800",
+                        "on-error-container": "#93000a",
+                        "secondary": "#555f70",
+                        "on-primary-fixed-variant": "#2d486d",
+                        "on-primary": "#ffffff",
+                        "inverse-on-surface": "#f1f0f4",
+                        "background": "#faf9fc",
+                        "inverse-surface": "#2f3033",
+                        "on-secondary-fixed": "#121c2a",
+                        "error-container": "#ffdad6",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed": "#ffddb2",
+                        "surface": "#faf9fc",
+                        "tertiary-container": "#503300",
+                        "on-secondary-container": "#5a6374",
+                        "outline": "#74777f",
+                        "inverse-primary": "#adc8f5",
+                        "secondary-fixed": "#d9e3f7",
+                        "on-tertiary-container": "#c69b5f",
+                        "primary-fixed-dim": "#adc8f5",
+                        "surface-bright": "#faf9fc"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "lg": "24px",
+                        "base": "8px",
+                        "gutter": "16px",
+                        "container-max": "1280px",
+                        "xl": "32px",
+                        "xs": "4px",
+                        "sm": "8px",
+                        "md": "16px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "display-logo": ["Plus Jakarta Sans"],
+                        "label-bold": ["Inter"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "display-logo": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-bold": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #F9F6EE; } /* Enforcing parchment override manually as requested while keeping tokens for components */
+        /* Range slider custom styling */
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            background: #022448; /* primary */
+            cursor: pointer;
+            margin-top: -6px; 
+            box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: #c4c6cf; /* outline-variant */
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body class="text-on-background font-body-md text-body-md antialiased pt-[64px]">
+<!-- TopNavBar Shared Component -->
+<header class="h-16 flex justify-between items-center px-lg w-full fixed top-0 z-50 bg-primary dark:bg-primary-container shadow-sm border-b border-outline-variant dark:border-outline">
+<div class="flex items-center gap-lg">
+<a class="font-display-logo text-display-logo text-on-primary dark:text-on-primary-container flex items-center gap-sm" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">local_shipping</span>
+                Oyadeliver
+            </a>
+<nav class="hidden md:flex gap-lg h-full items-center">
+<a class="text-on-primary/70 dark:text-on-primary-container/70 hover:opacity-80 transition-opacity font-label-bold text-label-bold" href="#">Home</a>
+<a class="text-on-primary font-bold border-b-2 border-on-primary pb-1 hover:opacity-80 transition-opacity font-label-bold text-label-bold h-full flex items-center mt-1" href="#">Products</a>
+</nav>
+</div>
+<div class="flex items-center gap-md">
+<button class="text-on-primary dark:text-on-primary-container hover:opacity-80 transition-opacity flex items-center justify-center">
+<span class="material-symbols-outlined">shopping_cart</span>
+</button>
+<button class="text-on-primary dark:text-on-primary-container hover:opacity-80 transition-opacity flex items-center justify-center">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="max-w-container-max mx-auto px-lg py-xl flex flex-col md:flex-row gap-xl min-h-[calc(100vh-64px)]">
+<!-- Left Sidebar (Filters) -->
+<aside class="w-full md:w-[280px] shrink-0 flex flex-col gap-lg border-r-0 md:border-r border-outline-variant pr-0 md:pr-lg">
+<!-- Search Input -->
+<div class="flex flex-col gap-xs">
+<label class="font-label-bold text-label-bold text-on-surface">Search Products</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full h-10 pl-[36px] pr-sm border border-outline-variant rounded-DEFAULT bg-surface-container-lowest font-body-md text-body-md text-on-surface focus:border-surface-tint focus:ring-0 focus:outline-none transition-colors" placeholder="Search..." type="text"/>
+</div>
+</div>
+<!-- Category Filter -->
+<div class="flex flex-col gap-md border-t border-outline-variant pt-md">
+<h3 class="font-headline-md text-headline-md text-on-surface">Categories</h3>
+<div class="flex flex-col gap-sm">
+<label class="flex items-center gap-sm cursor-pointer group">
+<input class="sr-only peer" name="category" type="radio"/>
+<div class="w-4 h-4 border border-outline-variant rounded-full peer-checked:border-primary peer-checked:bg-primary flex items-center justify-center transition-colors">
+<div class="w-1.5 h-1.5 bg-on-primary rounded-full opacity-0 peer-checked:opacity-100"></div>
+</div>
+<span class="font-body-md text-body-md text-on-surface-variant group-hover:text-on-surface">All Products</span>
+</label>
+<label class="flex items-center gap-sm cursor-pointer group">
+<input checked="" class="sr-only peer" name="category" type="radio"/>
+<div class="w-4 h-4 border border-outline-variant rounded-full peer-checked:border-surface-tint peer-checked:bg-surface-tint flex items-center justify-center transition-colors">
+<div class="w-1.5 h-1.5 bg-on-primary rounded-full opacity-0 peer-checked:opacity-100"></div>
+</div>
+<span class="font-body-md text-body-md text-on-surface font-medium">Fresh Vegetables</span>
+</label>
+<label class="flex items-center gap-sm cursor-pointer group">
+<input class="sr-only peer" name="category" type="radio"/>
+<div class="w-4 h-4 border border-outline-variant rounded-full peer-checked:border-primary peer-checked:bg-primary flex items-center justify-center transition-colors">
+<div class="w-1.5 h-1.5 bg-on-primary rounded-full opacity-0 peer-checked:opacity-100"></div>
+</div>
+<span class="font-body-md text-body-md text-on-surface-variant group-hover:text-on-surface">Fruits</span>
+</label>
+<label class="flex items-center gap-sm cursor-pointer group">
+<input class="sr-only peer" name="category" type="radio"/>
+<div class="w-4 h-4 border border-outline-variant rounded-full peer-checked:border-primary peer-checked:bg-primary flex items-center justify-center transition-colors">
+<div class="w-1.5 h-1.5 bg-on-primary rounded-full opacity-0 peer-checked:opacity-100"></div>
+</div>
+<span class="font-body-md text-body-md text-on-surface-variant group-hover:text-on-surface">Dairy &amp; Eggs</span>
+</label>
+</div>
+</div>
+<!-- Price Range -->
+<div class="flex flex-col gap-md border-t border-outline-variant pt-md">
+<h3 class="font-headline-md text-headline-md text-on-surface">Price Range</h3>
+<div class="flex flex-col gap-sm">
+<input class="w-full" max="100" min="0" type="range" value="50"/>
+<div class="flex justify-between font-label-sm text-label-sm text-on-surface-variant">
+<span>$0</span>
+<span>$50.00</span>
+</div>
+</div>
+</div>
+<!-- Action Button -->
+<button class="mt-sm w-full h-10 bg-secondary text-on-primary font-label-bold text-label-bold rounded-DEFAULT hover:opacity-90 transition-opacity">
+                Apply Filters
+            </button>
+</aside>
+<!-- Product Results Grid -->
+<section class="flex-1 flex flex-col gap-lg">
+<!-- Toolbar -->
+<div class="flex justify-between items-center bg-surface-container-lowest p-sm border border-outline-variant rounded-DEFAULT">
+<span class="font-body-md text-body-md text-on-surface-variant">Showing <strong class="text-on-surface">24</strong> results for "Vegetables"</span>
+<div class="flex items-center gap-sm">
+<label class="font-label-sm text-label-sm text-on-surface-variant hidden sm:block">Sort by:</label>
+<select class="h-8 pl-sm pr-lg py-0 border-none bg-transparent font-body-md text-body-md text-on-surface focus:ring-0 cursor-pointer">
+<option>Recommended</option>
+<option>Price: Low to High</option>
+<option>Price: High to Low</option>
+</select>
+</div>
+</div>
+<!-- Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-md">
+<!-- Product Card 1 -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded-DEFAULT overflow-hidden group hover:shadow-[0_1px_2px_rgba(0,0,0,0.05)] transition-shadow flex flex-col">
+<div class="h-48 w-full bg-surface-container-high relative">
+<img alt="Organic Carrots" class="w-full h-full object-cover" data-alt="A close-up, high-quality photograph of fresh organic carrots with vibrant green leafy tops resting on a clean, light surface. The lighting is bright and natural, creating a fresh and appetizing mood suitable for a premium grocery delivery interface. The colors are vivid oranges and greens against a minimalist, bright background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFcEfOhTk_5drpj6Bld9wsbplr1ZNS8ptTfDJUZaGonhSHvNUhqT-PYzKfLTf31MwzQXD0HMkDy9_uy0wQbBqxpZQz1QI4L888ZU-PfFSQ8CA12NytR4YrTfd08Bm3xfnq36w5HDRyOYDd2J7SGX2oWgdDJn0alyXhhoPU0bLI0IrzhOeNiP_FYleggdOsWqFtHSku2qArXD9FbkPsyqgcyzFt7xwur7jw-AvWAECoriNGtoGHASHjSHZLTWxTY7WM8BioXhRRmViW"/>
+<span class="absolute top-sm right-sm bg-error text-on-error font-label-bold text-label-bold px-sm py-xs rounded-full text-[10px] leading-tight">
+                            -15%
+                        </span>
+</div>
+<div class="p-md flex flex-col gap-sm flex-1">
+<div class="flex-1">
+<h4 class="font-body-lg text-body-lg font-medium text-on-surface line-clamp-1">Organic Bunch Carrots</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mt-xs">1 lb bunch</p>
+</div>
+<div class="flex items-end justify-between mt-sm">
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-primary">$2.99</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant line-through">$3.50</span>
+</div>
+<button class="h-8 w-8 bg-surface-container rounded-DEFAULT flex items-center justify-center text-primary hover:bg-surface-tint hover:text-on-primary transition-colors border border-outline-variant">
+<span class="material-symbols-outlined text-[20px]">add</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Product Card 2 -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded-DEFAULT overflow-hidden group hover:shadow-[0_1px_2px_rgba(0,0,0,0.05)] transition-shadow flex flex-col">
+<div class="h-48 w-full bg-surface-container-high relative">
+<img alt="Fresh Broccoli" class="w-full h-full object-cover" data-alt="A macro studio shot of fresh broccoli crowns arranged neatly. The scene is illuminated with crisp, cool white light that highlights the detailed texture and deep green color of the florets. The background is a soft, off-white studio drop, reinforcing a clean, modern, and healthy aesthetic for an online market." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC22rD-mgiJ3bFFl-Z_Tr4B78VyxzaAv5pr3MaebxVtwIUIqz_x4ddqfzM7FYLT-fBkLr94fOFXiZ8VyCOKdwhxZsBsv3Nx5th3WAhRv0496id2srWvndTvvPu9FhDf3F91qaLHnv1kSuJYMbGtwqM1Oc-_QbzSiukkYZYZMwzgu4YLHarZGfc_ohn-EYxxvy3rOb_LlBjzH34-8wgqGLBluq7b86RyawHIwtAu8w3fUSPJ5qjRMbCtUMywJU8yRmPUtRV4MM_UFPXH"/>
+</div>
+<div class="p-md flex flex-col gap-sm flex-1">
+<div class="flex-1">
+<h4 class="font-body-lg text-body-lg font-medium text-on-surface line-clamp-1">Fresh Broccoli Crowns</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mt-xs">Approx 0.5 lb each</p>
+</div>
+<div class="flex items-end justify-between mt-sm">
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-primary">$1.49</span>
+</div>
+<button class="h-8 w-8 bg-surface-container rounded-DEFAULT flex items-center justify-center text-primary hover:bg-surface-tint hover:text-on-primary transition-colors border border-outline-variant">
+<span class="material-symbols-outlined text-[20px]">add</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Product Card 3 -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded-DEFAULT overflow-hidden group hover:shadow-[0_1px_2px_rgba(0,0,0,0.05)] transition-shadow flex flex-col">
+<div class="h-48 w-full bg-surface-container-high relative">
+<img alt="Red Bell Peppers" class="w-full h-full object-cover" data-alt="Two vibrant red bell peppers sitting on a polished, light-colored wooden table. The lighting is soft and diffused, casting gentle shadows that emphasize the smooth, glossy skin of the peppers. The overall image has a high-utility, appetizing quality perfectly suited for a minimalist grocery shopping grid layout." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDl75SC0V_gc7A9xO9ciz29MLcSwhEculSjXr6DJVxl65Foa4n1eO5FkLnTcLWnHnPAdprAS2loD-KIlT92hiyPpZoMR7ME0hT8B48SZlJ_Yikvd8ZZJCu8RyxEp2Cr8ywifeUwpRSCEmW7r2te3siQtMmLfUJXMABoANQpa8lkPsf3yQaDXplA_QTtyA82dX9S8eWczbwsLdA7mfmC7rswW0yi-1g_kFnWoYny9eCfJATnBGR3qVkSLFvuk-zKrHWZQAhMNALga4t8"/>
+</div>
+<div class="p-md flex flex-col gap-sm flex-1">
+<div class="flex-1">
+<h4 class="font-body-lg text-body-lg font-medium text-on-surface line-clamp-1">Red Bell Peppers</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mt-xs">Sold individually</p>
+</div>
+<div class="flex items-end justify-between mt-sm">
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-primary">$1.20</span>
+</div>
+<button class="h-8 w-8 bg-surface-container rounded-DEFAULT flex items-center justify-center text-primary hover:bg-surface-tint hover:text-on-primary transition-colors border border-outline-variant">
+<span class="material-symbols-outlined text-[20px]">add</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Product Card 4 -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded-DEFAULT overflow-hidden group hover:shadow-[0_1px_2px_rgba(0,0,0,0.05)] transition-shadow flex flex-col">
+<div class="h-48 w-full bg-surface-container-high relative">
+<img alt="Spinach Leaves" class="w-full h-full object-cover" data-alt="A top-down view of fresh, vibrant baby spinach leaves loosely gathered in a modern, shallow white ceramic bowl. The scene is brightly lit with daylight mimicking illumination, creating a fresh, organic, and clean mood. The backdrop is slightly out of focus, keeping the attention entirely on the vivid green texture of the produce." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhuaofxKevY5g3Oi8MUFYGm8_MKMrjLjjzb2DTtL_1-bQZL3vleTXDLQJfdc2ovl4pfe6-qefMM7pLvuAGZzaF3YLjA9SGENeN1AoCLz-j-36NaUsuzx9l_a-mwxtPegFakgYTLlV15zihvuQnXvtjnbQrfCE94ycxR77LVKd13xjTxQvjpeXyrGzoKRMm4c8jpj11Yi48GAXAErc4sPIgU1elmg6XZIFUzPseqnsqpN2toQxv-pUdcWChpZRsw-OLN-TYhI3m--Ou"/>
+</div>
+<div class="p-md flex flex-col gap-sm flex-1">
+<div class="flex-1">
+<h4 class="font-body-lg text-body-lg font-medium text-on-surface line-clamp-1">Baby Spinach Box</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mt-xs">5 oz container</p>
+</div>
+<div class="flex items-end justify-between mt-sm">
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-primary">$3.49</span>
+</div>
+<button class="h-8 w-8 bg-surface-container rounded-DEFAULT flex items-center justify-center text-primary hover:bg-surface-tint hover:text-on-primary transition-colors border border-outline-variant">
+<span class="material-symbols-outlined text-[20px]">add</span>
+</button>
+</div>
+</div>
+</article>
+</div>
+<!-- Pagination (Simple functional) -->
+<div class="flex justify-center items-center gap-sm mt-lg">
+<button class="h-10 w-10 border border-outline-variant bg-surface-container-lowest flex items-center justify-center rounded-DEFAULT text-on-surface-variant hover:text-on-surface transition-colors disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-[20px]">chevron_left</span>
+</button>
+<button class="h-10 w-10 border border-primary bg-primary text-on-primary font-body-md text-body-md rounded-DEFAULT flex items-center justify-center">1</button>
+<button class="h-10 w-10 border border-outline-variant bg-surface-container-lowest text-on-surface font-body-md text-body-md rounded-DEFAULT flex items-center justify-center hover:bg-surface-container-low transition-colors">2</button>
+<button class="h-10 w-10 border border-outline-variant bg-surface-container-lowest text-on-surface font-body-md text-body-md rounded-DEFAULT flex items-center justify-center hover:bg-surface-container-low transition-colors">3</button>
+<button class="h-10 w-10 border border-outline-variant bg-surface-container-lowest flex items-center justify-center rounded-DEFAULT text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</button>
+</div>
+</section>
+</main>
+<!-- Footer Shared Component -->
+<footer class="w-full bg-primary dark:bg-primary-container border-t border-outline-variant dark:border-outline mt-auto">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-xl px-lg py-xl max-w-container-max mx-auto">
+<div class="flex flex-col gap-sm">
+<span class="font-display-logo text-display-logo text-on-primary flex items-center gap-sm">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">local_shipping</span>
+                    Oyadeliver
+                </span>
+<p class="font-body-md text-body-md text-on-primary/50 dark:text-on-primary-container/50 mt-sm">© 2024 Oyadeliver. All rights reserved.</p>
+</div>
+<div class="flex flex-col gap-sm">
+<a class="font-body-md text-body-md text-on-primary/50 dark:text-on-primary-container/50 hover:text-on-primary hover:opacity-100 transition-colors duration-200" href="#">About Us</a>
+<a class="font-body-md text-body-md text-on-primary/50 dark:text-on-primary-container/50 hover:text-on-primary hover:opacity-100 transition-colors duration-200" href="#">Help Center</a>
+</div>
+<div class="flex flex-col gap-sm">
+<a class="font-body-md text-body-md text-on-primary/50 dark:text-on-primary-container/50 hover:text-on-primary hover:opacity-100 transition-colors duration-200" href="#">Social Media</a>
+</div>
+</div>
+</footer>
+</body></html>
