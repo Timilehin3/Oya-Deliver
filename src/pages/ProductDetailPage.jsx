@@ -7,7 +7,7 @@ import Loader from '../components/ui/Loader';
 import EmptyState from '../components/ui/EmptyState';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
-import productsData from '../data/products.json';
+import supabase from '../supabase/client';
 import { formatPrice } from '../utils/formatPrice';
 
 const ProductDetailPage = () => {
@@ -24,23 +24,40 @@ const ProductDetailPage = () => {
   const [adding, setAdding] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
-    setQuantity(1);
-    const timer = setTimeout(() => {
-      const found = productsData.find((p) => p.id === id) ?? null;
-      setProduct(found);
-      setAllProducts(productsData);
-      setLoading(false);
-    }, 1000);
-    return () => clearTimeout(timer);
+    let mounted = true;
+    async function loadData() {
+      setLoading(true);
+      setQuantity(1);
+      
+      const { data: found, error } = await supabase
+        .from('products')
+        .select('*')
+        .eq('id', id)
+        .maybeSingle();
+
+      if (error) console.error(error);
+
+      if (mounted) {
+        setProduct(found || null);
+        
+        if (found) {
+          const { data: relatedData } = await supabase
+            .from('products')
+            .select('*')
+            .eq('category', found.category)
+            .neq('id', found.id)
+            .limit(4);
+          setAllProducts(relatedData || []);
+        }
+      }
+      if (mounted) setLoading(false);
+    }
+    loadData();
+
+    return () => { mounted = false; };
   }, [id]);
 
-  const related = useMemo(() => {
-    if (!product) return [];
-    return allProducts
-      .filter((p) => p.category === product.category && p.id !== product.id)
-      .slice(0, 4);
-  }, [allProducts, product]);
+  const related = allProducts;
 
   const handleAddToCart = async () => {
     if (!isAuthenticated) {

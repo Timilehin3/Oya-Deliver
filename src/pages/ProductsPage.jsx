@@ -8,7 +8,7 @@ import EmptyState from '../components/ui/EmptyState';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 import categories from '../data/categories.json';
-import productsData from '../data/products.json';
+import supabase from '../supabase/client';
 import { formatPrice } from '../utils/formatPrice';
 
 const SORT_OPTIONS = [
@@ -18,7 +18,7 @@ const SORT_OPTIONS = [
   { value: 'name-asc', label: 'Name: A–Z' },
 ];
 
-const MAX_PRICE = Math.max(...productsData.map((p) => p.price));
+const MAX_PRICE = 20000;
 const MIN_PRICE = 500;
 
 function filterProducts(products, { search, selectedCategories, maxPrice }) {
@@ -76,12 +76,18 @@ const ProductsPage = () => {
   }, [search]);
 
   useEffect(() => {
-    setLoading(true);
-    const timer = setTimeout(() => {
-      setProducts(productsData);
+    async function loadProducts() {
+      setLoading(true);
+      const { data, error } = await supabase.from('products').select('*');
+      if (error) {
+        console.error('Error fetching products:', error);
+        toast.error('Failed to load products');
+      } else {
+        setProducts(data || []);
+      }
       setLoading(false);
-    }, 1000);
-    return () => clearTimeout(timer);
+    }
+    loadProducts();
   }, []);
 
   const setSearchParam = (query) => {
