@@ -4,33 +4,41 @@ import { FiSearch, FiArrowRight } from "react-icons/fi";
 import ProductCard from "../components/ui/ProductCard";
 import ProductCardSkeleton from "../components/ui/ProductCardSkeleton";
 import categories from "../data/categories.json";
-import productsData from "../data/products.json";
 import logoOnlyText from "../assets/oyadeliver_logo_onlytext.png";
+import supabase from "../supabase/client";
+import { useAuth } from "../context/AuthContext";
 
 const FEATURED_CATEGORIES = categories.slice(0, 6);
-
-const categoryAccent = {
-  Fruits: "border-l-oya-green",
-  Vegetables: "border-l-green-600",
-  Dairy: "border-l-blue-600",
-  Bakery: "border-l-oya-amber",
-  "Meat & Seafood": "border-l-rose-600",
-  Pantry: "border-l-orange-600",
-};
 
 const LandingPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [featured, setFeatured] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      const items = productsData.filter((p) => p.featured).slice(0, 4);
-      setFeatured(items);
+    async function fetchFeatured() {
+      const { data, error } = await supabase
+        .from("products")
+        .select("*")
+        .eq("featured", true)
+        .limit(4);
+      
+      if (!error && data) {
+        setFeatured(data);
+      } else if (!error && (!data || data.length === 0)) {
+        // Fallback if no featured products found: get the newest 4
+        const { data: recentData } = await supabase
+          .from("products")
+          .select("*")
+          .order("created_at", { ascending: false })
+          .limit(4);
+        setFeatured(recentData || []);
+      }
       setLoading(false);
-    }, 1000);
-    return () => clearTimeout(timer);
+    }
+    fetchFeatured();
   }, []);
 
   const handleSearch = (e) => {
@@ -147,13 +155,11 @@ const LandingPage = () => {
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-          {FEATURED_CATEGORIES.map((cat) => (
+          {FEATURED_CATEGORIES.map((cat, i) => (
             <Link
               key={cat}
               to={`/products?category=${encodeURIComponent(cat)}`}
-              className={`bg-white border border-oya-teal/10 border-l-4 ${
-                categoryAccent[cat] ?? "border-l-oya-teal"
-              } rounded-lg p-5 hover:border-oya-green/40 transition-colors`}
+              className={`bg-white border border-oya-teal/10 rounded-lg p-5 hover:border-oya-green/40 transition-colors`}
             >
               <span className="font-bold text-sm text-oya-teal">{cat}</span>
             </Link>
@@ -194,24 +200,26 @@ const LandingPage = () => {
       </section>
 
       {/* CTA strip */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-        <div className="bg-oya-teal rounded-xl p-8 sm:p-10 flex flex-col sm:flex-row items-center justify-between gap-6">
-          <div className="text-center sm:text-left">
-            <h2 className="text-2xl font-extrabold text-oya-paper">
-              First delivery on us
-            </h2>
-            <p className="text-oya-paper/70 mt-2">
-              Sign up today and get free delivery on your first order.
-            </p>
+      {!isAuthenticated && (
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+          <div className="bg-oya-teal rounded-xl p-8 sm:p-10 flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div className="text-center sm:text-left">
+              <h2 className="text-2xl font-extrabold text-oya-paper">
+                First delivery on us
+              </h2>
+              <p className="text-oya-paper/70 mt-2">
+                Sign up today and get free delivery on your first order.
+              </p>
+            </div>
+            <Link
+              to="/register"
+              className="px-8 py-3 bg-oya-amber text-oya-teal font-bold rounded-lg hover:bg-oya-green hover:text-white transition-colors shrink-0"
+            >
+              Create free account
+            </Link>
           </div>
-          <Link
-            to="/register"
-            className="px-8 py-3 bg-oya-amber text-oya-teal font-bold rounded-lg hover:bg-oya-green hover:text-white transition-colors shrink-0"
-          >
-            Create free account
-          </Link>
-        </div>
-      </section>
+        </section>
+      )}
     </div>
   );
 };

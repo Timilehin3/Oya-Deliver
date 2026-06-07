@@ -1,9 +1,12 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import React, { Suspense, lazy } from "react";
 import Layout from "./components/layout/Layout";
 import ProtectedRoute from "./components/ui/ProtectedRoute";
 import Loader from "./components/ui/Loader";
+
+import AdminRoute from "./components/layout/AdminRoute";
+import AdminLayout from "./components/admin/AdminLayout";
 
 // Route-level code-splitting
 const LandingPage = lazy(() => import("./pages/LandingPage"));
@@ -99,6 +102,23 @@ function App() {
                 </ProtectedRoute>
               }
             />
+
+            {/* Admin Nested Routes */}
+            <Route
+              path="admin"
+              element={
+                <AdminRoute>
+                  <AdminLayout />
+                </AdminRoute>
+              }
+            >
+              <Route index element={<Navigate to="/admin/catalog" replace />} />
+              <Route path="catalog" element={<AdminCatalogPage />} />
+              <Route path="dashboard" element={<div className="text-oya-teal p-4 font-semibold">Dashboard (Under Construction)</div>} />
+              <Route path="orders" element={<div className="text-oya-teal p-4 font-semibold">Orders Management (Under Construction)</div>} />
+              <Route path="customers" element={<div className="text-oya-teal p-4 font-semibold">Customers (Under Construction)</div>} />
+              <Route path="settings" element={<div className="text-oya-teal p-4 font-semibold">Settings (Under Construction)</div>} />
+            </Route>
 
             <Route path="*" element={<Error404Page />} />
           </Route>

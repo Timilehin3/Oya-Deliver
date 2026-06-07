@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { FiPlus, FiEdit2, FiTrash2, FiAlertCircle, FiImage } from "react-icons/fi";
-import supabase from "../../../supabase/client";
-import { formatPrice } from "../../../utils/formatPrice";
+import supabase from "../../supabase/client";
+import { formatPrice } from "../../utils/formatPrice";
 import toast from "react-hot-toast";
+import categories from "../../data/categories.json";
 
 const AdminCatalogPage = () => {
   const [products, setProducts] = useState([]);
@@ -16,7 +17,7 @@ const AdminCatalogPage = () => {
   const [form, setForm] = useState({
     name: "",
     price: "",
-    category: "Fruits",
+    category: categories[0],
     unit: "kg",
     description: "",
     stock_quantity: 0,
@@ -28,6 +29,13 @@ const AdminCatalogPage = () => {
   });
   const [imageFile, setImageFile] = useState(null);
   const [isSaving, setIsSaving] = useState(false);
+
+  // Searchable category state
+  const [categorySearch, setCategorySearch] = useState("");
+  const [isCategoryOpen, setIsCategoryOpen] = useState(false);
+  const filteredCategories = categories.filter((c) =>
+    c.toLowerCase().includes(categorySearch.toLowerCase())
+  );
 
   useEffect(() => {
     fetchProducts();
@@ -70,7 +78,7 @@ const AdminCatalogPage = () => {
       setForm({
         name: "",
         price: "",
-        category: "Fruits",
+        category: categories[0],
         unit: "kg",
         description: "",
         stock_quantity: 0,
@@ -326,22 +334,43 @@ const AdminCatalogPage = () => {
 
                   <div>
                     <label className="block text-sm font-semibold text-oya-teal mb-1">Category</label>
-                    <select
-                      value={form.category}
-                      onChange={(e) => setForm({ ...form, category: e.target.value })}
-                      className="w-full px-3 py-2 border border-oya-teal/20 rounded-lg focus:outline-none focus:border-oya-green"
-                    >
-                      <option>Fruits</option>
-                      <option>Vegetables</option>
-                      <option>Dairy</option>
-                      <option>Bakery</option>
-                      <option>Meat & Seafood</option>
-                      <option>Pantry</option>
-                      <option>Beverages</option>
-                      <option>Snacks</option>
-                      <option>Frozen</option>
-                      <option>Deals</option>
-                    </select>
+                    <div className="relative" onBlur={(e) => { if (!e.currentTarget.contains(e.relatedTarget)) setIsCategoryOpen(false); }}>
+                      <input
+                        type="text"
+                        autoComplete="off"
+                        placeholder="Search category…"
+                        value={isCategoryOpen ? categorySearch : form.category}
+                        onFocus={() => { setCategorySearch(""); setIsCategoryOpen(true); }}
+                        onChange={(e) => { setCategorySearch(e.target.value); setIsCategoryOpen(true); }}
+                        className="w-full px-3 py-2 border border-oya-teal/20 rounded-lg focus:outline-none focus:border-oya-green text-sm"
+                      />
+                      {isCategoryOpen && filteredCategories.length > 0 && (
+                        <ul className="absolute z-50 mt-1 w-full max-h-52 overflow-y-auto bg-white border border-oya-teal/20 rounded-lg shadow-lg">
+                          {filteredCategories.map((cat) => (
+                            <li
+                              key={cat}
+                              tabIndex={0}
+                              onMouseDown={(e) => {
+                                e.preventDefault();
+                                setForm({ ...form, category: cat });
+                                setCategorySearch("");
+                                setIsCategoryOpen(false);
+                              }}
+                              className={`px-3 py-2 text-sm cursor-pointer hover:bg-oya-green/10 hover:text-oya-green ${
+                                form.category === cat ? "bg-oya-green/10 text-oya-green font-semibold" : "text-oya-teal"
+                              }`}
+                            >
+                              {cat}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                      {isCategoryOpen && filteredCategories.length === 0 && (
+                        <div className="absolute z-50 mt-1 w-full px-3 py-2 bg-white border border-oya-teal/20 rounded-lg shadow-lg text-sm text-oya-teal/50">
+                          No matching category
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
 
@@ -406,6 +435,18 @@ const AdminCatalogPage = () => {
                         />
                       </label>
                     </div>
+                  </div>
+
+                  <div className="pt-2">
+                    <label className="flex items-center gap-2 cursor-pointer text-sm font-semibold text-oya-teal hover:text-oya-green">
+                      <input
+                        type="checkbox"
+                        checked={form.featured}
+                        onChange={(e) => setForm({ ...form, featured: e.target.checked })}
+                        className="rounded border-oya-teal/30 text-oya-green focus:ring-oya-green/30"
+                      />
+                      Feature this product on the landing page
+                    </label>
                   </div>
                 </div>
               </div>
