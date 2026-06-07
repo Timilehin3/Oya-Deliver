@@ -9,14 +9,14 @@ import logoOnlyText from "../assets/oyadeliver_logo_onlytext.png";
 
 const FEATURED_CATEGORIES = categories.slice(0, 6);
 
-const categoryAccent = {
-  Fruits: "border-l-oya-green",
-  Vegetables: "border-l-green-600",
-  Dairy: "border-l-blue-600",
-  Bakery: "border-l-oya-amber",
-  "Meat & Seafood": "border-l-rose-600",
-  Pantry: "border-l-orange-600",
-};
+const ACCENT_CYCLE = [
+  "border-l-oya-green",
+  "border-l-orange-500",
+  "border-l-rose-500",
+  "border-l-blue-500",
+  "border-l-amber-500",
+  "border-l-purple-500",
+];
 
 const LandingPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -147,12 +147,12 @@ const LandingPage = () => {
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-          {FEATURED_CATEGORIES.map((cat) => (
+          {FEATURED_CATEGORIES.map((cat, i) => (
             <Link
               key={cat}
               to={`/products?category=${encodeURIComponent(cat)}`}
               className={`bg-white border border-oya-teal/10 border-l-4 ${
-                categoryAccent[cat] ?? "border-l-oya-teal"
+                ACCENT_CYCLE[i % ACCENT_CYCLE.length]
               } rounded-lg p-5 hover:border-oya-green/40 transition-colors`}
             >
               <span className="font-bold text-sm text-oya-teal">{cat}</span>
