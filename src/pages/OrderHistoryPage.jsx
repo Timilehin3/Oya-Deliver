@@ -172,11 +172,14 @@ const OrderHistoryPage = () => {
                     </div>
                   </div>
                   
-                  {/* Future-proofing for order details page / modal */}
-                  <button className="inline-flex items-center gap-1 text-sm font-semibold text-oya-green hover:text-oya-teal transition-colors">
+                  {/* Link to order tracking/details */}
+                  <Link 
+                    to={`/tracking/${order.order_ref}`}
+                    className="inline-flex items-center gap-1 text-sm font-semibold text-oya-green hover:text-oya-teal transition-colors"
+                  >
                     View Details
                     <FiChevronRight className="w-4 h-4" />
-                  </button>
+                  </Link>
                 </div>
 
                 <div className="pt-4 border-t border-oya-teal/5">
