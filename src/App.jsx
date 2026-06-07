@@ -18,6 +18,7 @@ const OrderHistoryPage = lazy(() => import("./pages/OrderHistoryPage"));
 const LoginPage = lazy(() => import("./pages/LoginPage"));
 const RegisterPage = lazy(() => import("./pages/RegisterPage"));
 const UserProfilePage = lazy(() => import("./pages/UserProfilePage"));
+const AdminCatalogPage = lazy(() => import("./pages/admin/AdminCatalogPage"));
 const Error404Page = lazy(() => import("./pages/Error404Page"));
 
 function App() {

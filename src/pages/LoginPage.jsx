@@ -18,17 +18,6 @@ const LoginPage = () => (
           </p>
         </div>
 
-        <div className="grid gap-4 rounded-lg border border-slate-200 bg-oya-paper p-5 text-sm text-slate-700">
-          <p>
-            Demo account: <span className="font-semibold">user@test.com</span> /{" "}
-            <span className="font-semibold">password123</span>
-          </p>
-          <p>
-            Need an admin login? Use{" "}
-            <span className="font-semibold">admin@oya.com</span> /{" "}
-            <span className="font-semibold">admin123</span>.
-          </p>
-        </div>
       </div>
 
       <div className="mt-8 lg:mt-0">

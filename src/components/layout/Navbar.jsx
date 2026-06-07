@@ -60,6 +60,14 @@ const Navbar = () => {
                         {profile?.name ?? "Account"}
                       </span>
                     </Link>
+                    {profile?.is_admin && (
+                      <Link
+                        to="/admin"
+                        className="hidden sm:block text-sm font-medium text-oya-teal hover:text-oya-green"
+                      >
+                        Admin
+                      </Link>
+                    )}
                     <button
                       type="button"
                       onClick={handleLogout}
@@ -134,6 +142,15 @@ const Navbar = () => {
                 >
                   My profile
                 </Link>
+                {profile?.is_admin && (
+                  <Link
+                    to="/admin"
+                    className="block text-oya-teal font-medium py-2"
+                    onClick={closeMobileNav}
+                  >
+                    Admin Panel
+                  </Link>
+                )}
                 <button
                   type="button"
                   onClick={handleLogout}
