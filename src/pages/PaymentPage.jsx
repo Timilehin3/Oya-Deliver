@@ -74,9 +74,15 @@ function detectNetwork(rawDigits) {
   return null;
 }
 
-// Verve can be 16–19 digits; others are 16
+// Input cap: Verve goes up to 19 digits, others 16
 function maxCardLength(network) {
   return network === "verve" ? 19 : 16;
+}
+
+// Valid lengths: Verve accepts 16 OR 19; others require exactly 16
+function isValidCardLength(digits, network) {
+  if (network === "verve") return digits.length === 16 || digits.length === 19;
+  return digits.length === 16;
 }
 
 // Group into 4-digit blocks (works for any length up to 19)
@@ -191,6 +197,19 @@ const PaymentPage = () => {
 
     // race-condition guard
     if (isProcessingRef.current || status === "processing") return;
+
+    // card length validation (before locking UI)
+    const enteredDigits = card.number.replace(/\D/g, "");
+    if (!isValidCardLength(enteredDigits, detectedNetwork)) {
+      const expected =
+        detectedNetwork === "verve"
+          ? "16 or 19 digits"
+          : "16 digits";
+      setStatus("failed");
+      setFailureReason(`Invalid card number — ${detectedNetwork ? detectedNetwork.charAt(0).toUpperCase() + detectedNetwork.slice(1) : "Card"} requires ${expected}.`);
+      return;
+    }
+
     isProcessingRef.current = true;
     setStatus("processing");
     setFailureReason("");
@@ -387,7 +406,7 @@ const PaymentPage = () => {
                           number: formatCardNumber(e.target.value, detectedNetwork),
                         }))
                       }
-                      placeholder={detectedNetwork === "verve" ? "0000 0000 0000 0000 000" : "0000 0000 0000 0000"}
+                      placeholder={detectedNetwork === "verve" ? "16 or 19 digits" : "0000 0000 0000 0000"}
                       maxLength={cardMaxLen + Math.floor(cardMaxLen / 4) - 1}
                       required
                       disabled={isProcessing}
