@@ -74,20 +74,18 @@ function detectNetwork(rawDigits) {
   return null;
 }
 
-// Input cap: Verve goes up to 19 digits, others 16
-function maxCardLength(network) {
-  return network === "verve" ? 19 : 16;
+// All cards: cap input at 19, require at least 16 to submit
+function maxCardLength() {
+  return 19;
 }
 
-// Valid lengths: Verve accepts 16 OR 19; others require exactly 16
-function isValidCardLength(digits, network) {
-  if (network === "verve") return digits.length === 16 || digits.length === 19;
-  return digits.length === 16;
+function isValidCardLength(digits) {
+  return digits.length >= 16 && digits.length <= 19;
 }
 
-// Group into 4-digit blocks (works for any length up to 19)
+// Group into 4-digit blocks
 function formatCardNumber(val, network) {
-  const max = maxCardLength(network);
+  const max = maxCardLength();
   const digits = val.replace(/\D/g, "").slice(0, max);
   return digits.replace(/(.{4})/g, "$1 ").trim();
 }
@@ -162,7 +160,7 @@ const PaymentPage = () => {
 
   const rawDigits = card.number.replace(/\D/g, "");
   const detectedNetwork = detectNetwork(rawDigits);
-  const cardMaxLen = maxCardLength(detectedNetwork);
+  const cardMaxLen = maxCardLength();
 
   // Sync cardholder name when profile loads
   useEffect(() => {
@@ -200,13 +198,9 @@ const PaymentPage = () => {
 
     // card length validation (before locking UI)
     const enteredDigits = card.number.replace(/\D/g, "");
-    if (!isValidCardLength(enteredDigits, detectedNetwork)) {
-      const expected =
-        detectedNetwork === "verve"
-          ? "16 or 19 digits"
-          : "16 digits";
+    if (!isValidCardLength(enteredDigits)) {
       setStatus("failed");
-      setFailureReason(`Invalid card number — ${detectedNetwork ? detectedNetwork.charAt(0).toUpperCase() + detectedNetwork.slice(1) : "Card"} requires ${expected}.`);
+      setFailureReason("Invalid card number — must be between 16 and 19 digits.");
       return;
     }
 
@@ -406,8 +400,8 @@ const PaymentPage = () => {
                           number: formatCardNumber(e.target.value, detectedNetwork),
                         }))
                       }
-                      placeholder={detectedNetwork === "verve" ? "16 or 19 digits" : "0000 0000 0000 0000"}
-                      maxLength={cardMaxLen + Math.floor(cardMaxLen / 4) - 1}
+                      placeholder="0000 0000 0000 0000 000"
+                      maxLength={23}
                       required
                       disabled={isProcessing}
                       className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-4 py-3 pr-16 text-sm text-slate-900 outline-none transition focus:border-oya-green focus:ring-2 focus:ring-oya-green/20 disabled:bg-slate-50"
