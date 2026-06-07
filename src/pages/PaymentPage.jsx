@@ -66,15 +66,74 @@ function ProcessingOverlay() {
   );
 }
 
-/* ─── card input helpers ──────────────────────────────────────────────── */
-function formatCardNumber(val) {
-  return val.replace(/\D/g, "").slice(0, 16).replace(/(.{4})/g, "$1 ").trim();
+/* ─── card network detection ─────────────────────────────────────────── */
+function detectNetwork(rawDigits) {
+  if (/^4/.test(rawDigits)) return "visa";
+  if (/^5[1-5]|^2[2-7]/.test(rawDigits)) return "mastercard";
+  if (/^(5061|6500|6501|6507|6509)/.test(rawDigits)) return "verve";
+  return null;
+}
+
+// Verve can be 16–19 digits; others are 16
+function maxCardLength(network) {
+  return network === "verve" ? 19 : 16;
+}
+
+// Group into 4-digit blocks (works for any length up to 19)
+function formatCardNumber(val, network) {
+  const max = maxCardLength(network);
+  const digits = val.replace(/\D/g, "").slice(0, max);
+  return digits.replace(/(.{4})/g, "$1 ").trim();
 }
 
 function formatExpiry(val) {
   const digits = val.replace(/\D/g, "").slice(0, 4);
   if (digits.length > 2) return `${digits.slice(0, 2)}/${digits.slice(2)}`;
   return digits;
+}
+
+/* ─── network logos ───────────────────────────────────────────────────── */
+function VisaLogo() {
+  return (
+    <svg viewBox="0 0 38 24" className="h-6 w-auto" aria-label="Visa">
+      <rect width="38" height="24" rx="4" fill="#1A1F71" />
+      <text x="5" y="17" fontFamily="Arial" fontWeight="bold" fontSize="13" fill="#FFFFFF" letterSpacing="-0.5">VISA</text>
+    </svg>
+  );
+}
+
+function MastercardLogo() {
+  return (
+    <svg viewBox="0 0 38 24" className="h-6 w-auto" aria-label="Mastercard">
+      <rect width="38" height="24" rx="4" fill="#252525" />
+      <circle cx="14" cy="12" r="8" fill="#EB001B" />
+      <circle cx="24" cy="12" r="8" fill="#F79E1B" />
+      <path d="M19 6.8a8 8 0 010 10.4A8 8 0 0119 6.8z" fill="#FF5F00" />
+    </svg>
+  );
+}
+
+function VerveLogo() {
+  return (
+    <svg viewBox="0 0 50 24" className="h-6 w-auto" aria-label="Verve">
+      <rect width="50" height="24" rx="4" fill="#1B3A6B" />
+      <text x="5" y="17" fontFamily="Arial" fontWeight="900" fontSize="11" fill="#E8A020" letterSpacing="0.5">Verve</text>
+    </svg>
+  );
+}
+
+function NetworkLogo({ network }) {
+  if (network === "visa") return <VisaLogo />;
+  if (network === "mastercard") return <MastercardLogo />;
+  if (network === "verve") return <VerveLogo />;
+  // placeholder slots when no network detected
+  return (
+    <div className="flex gap-1.5">
+      <div className="h-6 w-9 rounded bg-slate-200" />
+      <div className="h-6 w-9 rounded bg-slate-200" />
+      <div className="h-6 w-9 rounded bg-slate-200" />
+    </div>
+  );
 }
 
 /* ════════════════════════════════════════════════════════════════════════ */
@@ -94,6 +153,10 @@ const PaymentPage = () => {
     cvv: "",
     name: profile?.name || user?.name || "",
   });
+
+  const rawDigits = card.number.replace(/\D/g, "");
+  const detectedNetwork = detectNetwork(rawDigits);
+  const cardMaxLen = maxCardLength(detectedNetwork);
 
   // Sync cardholder name when profile loads
   useEffect(() => {
@@ -299,26 +362,48 @@ const PaymentPage = () => {
             </div>
 
             <div className="rounded-lg border border-oya-teal/10 bg-white p-6">
-              <div className="flex items-center gap-3 mb-6 text-oya-teal">
-                <FiCreditCard className="w-6 h-6" />
-                <span className="font-semibold text-base">Credit or Debit Card</span>
+              <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center gap-3 text-oya-teal">
+                  <FiCreditCard className="w-6 h-6" />
+                  <span className="font-semibold text-base">Credit or Debit Card</span>
+                </div>
+                <div className="transition-all duration-300">
+                  <NetworkLogo network={detectedNetwork} />
+                </div>
               </div>
 
               <form onSubmit={handlePayment} className="grid gap-5">
                 {/* card number */}
                 <label className="block text-sm font-semibold text-oya-teal">
                   Card number
-                  <input
-                    type="text"
-                    inputMode="numeric"
-                    value={card.number}
-                    onChange={(e) => setCard((c) => ({ ...c, number: formatCardNumber(e.target.value) }))}
-                    placeholder="0000 0000 0000 0000"
-                    maxLength={19}
-                    required
-                    disabled={isProcessing}
-                    className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-oya-green focus:ring-2 focus:ring-oya-green/20 disabled:bg-slate-50"
-                  />
+                  <div className="relative">
+                    <input
+                      type="text"
+                      inputMode="numeric"
+                      value={card.number}
+                      onChange={(e) =>
+                        setCard((c) => ({
+                          ...c,
+                          number: formatCardNumber(e.target.value, detectedNetwork),
+                        }))
+                      }
+                      placeholder={detectedNetwork === "verve" ? "0000 0000 0000 0000 000" : "0000 0000 0000 0000"}
+                      maxLength={cardMaxLen + Math.floor(cardMaxLen / 4) - 1}
+                      required
+                      disabled={isProcessing}
+                      className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-4 py-3 pr-16 text-sm text-slate-900 outline-none transition focus:border-oya-green focus:ring-2 focus:ring-oya-green/20 disabled:bg-slate-50"
+                    />
+                    {detectedNetwork && (
+                      <div className="absolute right-3 top-1/2 -translate-y-1/2">
+                        <NetworkLogo network={detectedNetwork} />
+                      </div>
+                    )}
+                  </div>
+                  {detectedNetwork && (
+                    <p className="mt-1.5 text-xs text-oya-green font-medium capitalize">
+                      {detectedNetwork === "mastercard" ? "Mastercard" : detectedNetwork.charAt(0).toUpperCase() + detectedNetwork.slice(1)} detected
+                    </p>
+                  )}
                 </label>
 
                 {/* expiry + cvv */}
