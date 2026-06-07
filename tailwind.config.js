@@ -10,7 +10,8 @@ export default {
         "oya-paper": "#faf8f5",
       },
       fontFamily: {
-        sans: ['"Bebas Neue"', "sans-serif"],
+        sans: ['"Inter"', "sans-serif"],
+        heading: ['"Plus Jakarta Sans"', "sans-serif"],
       },
     },
   },
