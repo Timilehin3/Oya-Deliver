@@ -50,8 +50,8 @@ export { auth, db };
 
 **Migration path:**
 
-- **Option A (Recommended):** Keep as-is; mark deprecated in comments since app prefers Clerk + Supabase.
-- **Option B:** Remove entirely once forms updated to check only `supabaseConfigured && clerkPublishableKey`.
+- **Option A (Recommended):** Keep as-is; mark deprecated in comments since app prefers Supabase.
+- **Option B:** Remove entirely once forms updated to check only `supabaseConfigured`.
 
 **Recommendation:** Leave for now; safe and provides fallback detection logic.
 
@@ -113,7 +113,7 @@ disabled={!(supabaseConfigured || firebaseConfigured) || loading}
 | `setDoc(doc(...), data)`      | AuthContext               | Supabase `.insert()` / `.update()`          | ✅ Complete |
 | `getDoc(doc(...))`            | AuthContext, CheckoutPage | Supabase `.select()`                        | ✅ Complete |
 | Cart persistence              | CartContext               | Supabase `.upsert()`                        | ✅ Complete |
-| User profile sync             | AuthContext               | Supabase `users` table + Clerk              | ✅ Complete |
+| User profile sync             | AuthContext               | Supabase `users` table + Auth               | ✅ Complete |
 
 ### ❌ Not Found / Never Used
 
@@ -169,7 +169,7 @@ Remove or mark obsolete in `.env`:
 
 **Migration Status: ~95% Complete**
 
-- ✅ AuthContext: Using Clerk + Supabase
+- ✅ AuthContext: Using Supabase Auth
 - ✅ CartContext: Using Supabase localStorage merge
 - ✅ No active Firestore API calls in app logic
 - ⏳ Firebase config still present for fallback detection (safe to leave or remove)

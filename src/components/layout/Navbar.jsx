@@ -4,25 +4,12 @@ import { FiShoppingCart, FiUser, FiMenu, FiX } from "react-icons/fi";
 import logo from "../../assets/oyadeliver_both_textandbird.png";
 import { useAuth } from "../../context/AuthContext";
 import { useCart } from "../../context/CartContext";
-import {
-  SignInButton,
-  SignUpButton,
-  UserButton,
-  useUser,
-} from "@clerk/clerk-react";
 
 const Navbar = () => {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   const { isAuthenticated, profile, logout, loading } = useAuth();
   const { cartCount } = useCart();
   const navigate = useNavigate();
-  const clerkConfigured = Boolean(import.meta.env.VITE_CLERK_PUBLISHABLE_KEY);
-  let clerkUser = { isSignedIn: false };
-  try {
-    clerkUser = useUser();
-  } catch (e) {
-    // ignore — Clerk not configured
-  }
 
   const closeMobileNav = () => setIsMobileNavOpen(false);
 
@@ -62,39 +49,7 @@ const Navbar = () => {
           <div className="flex items-center space-x-4 sm:space-x-6">
             {!loading && (
               <>
-                {clerkConfigured ? (
-                  <>
-                    {clerkUser?.isSignedIn ? (
-                      <>
-                        <Link
-                          to="/profile"
-                          className="text-oya-teal hover:text-oya-amber transition-colors flex items-center gap-1"
-                        >
-                          <UserButton />
-                          <span className="hidden sm:block text-sm font-medium max-w-[120px] truncate">
-                            {clerkUser?.user?.fullName ?? "Account"}
-                          </span>
-                        </Link>
-                      </>
-                    ) : (
-                      <div className="flex items-center gap-3">
-                        <SignInButton>
-                          <button className="text-oya-teal hover:text-oya-amber transition-colors flex items-center gap-1">
-                            <FiUser className="w-6 h-6" />
-                            <span className="hidden sm:block text-sm font-medium">
-                              Log in
-                            </span>
-                          </button>
-                        </SignInButton>
-                        <SignUpButton>
-                          <button className="hidden sm:block text-sm font-medium text-oya-teal hover:text-oya-green">
-                            Sign up
-                          </button>
-                        </SignUpButton>
-                      </div>
-                    )}
-                  </>
-                ) : isAuthenticated ? (
+                {isAuthenticated ? (
                   <>
                     <Link
                       to="/profile"

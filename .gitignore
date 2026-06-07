@@ -18,7 +18,14 @@ dist-ssr
 # Editor / agent config
 .cursor/
 .agents/
+.claude/
+.codex/
 skills-lock.json
+.vc-installed-files
+.vc-version
+AGENTS.md
+CLAUDE.md
+process/
 
 # Editor directories and files
 .vscode/*

@@ -1,8 +1,5 @@
 import { Link } from "react-router-dom";
 import RegisterForm from "../components/forms/RegisterForm";
-import { SignUpButton } from "@clerk/clerk-react";
-
-const clerkConfigured = Boolean(import.meta.env.VITE_CLERK_PUBLISHABLE_KEY);
 
 const RegisterPage = () => (
   <section className="min-h-[calc(100vh-6rem)] flex items-center justify-center px-4 py-12">
@@ -23,7 +20,8 @@ const RegisterPage = () => (
 
         <div className="grid gap-4 rounded-lg border border-slate-200 bg-oya-paper p-5 text-sm text-slate-700">
           <p>
-            We use Clerk for authentication and Supabase for account profiles.
+            We use Supabase Auth for authentication and Supabase for account
+            profiles.
           </p>
           <p>Already registered? Kindly sign in instead.</p>
         </div>
@@ -37,20 +35,7 @@ const RegisterPage = () => (
           <p className="mt-2 text-sm text-slate-600">
             Start shopping with Oya Deliver and save your delivery details.
           </p>
-          {clerkConfigured ? (
-            <div className="space-y-4">
-              <p className="text-sm text-slate-600">
-                Create an account using Clerk (recommended).
-              </p>
-              <SignUpButton>
-                <button className="w-full rounded-lg bg-oya-teal text-white py-2">
-                  Sign up with Clerk
-                </button>
-              </SignUpButton>
-            </div>
-          ) : (
-            <RegisterForm />
-          )}
+          <RegisterForm />
         </div>
 
         <p className="mt-6 text-center text-sm text-slate-600">

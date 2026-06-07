@@ -1,63 +1,84 @@
 # Oya Deliver
 
-Grocery delivery platform built with React, Vite, Tailwind CSS, and **Supabase** (Postgres) for backend data. Frontend auth can be provided by **Clerk** (optional). Firebase is supported as a legacy fallback in some components but the repository is being migrated to Supabase.
+Oya Deliver is a student-built grocery delivery web app made with React, Vite, and Tailwind CSS. The site is designed to show how a simple e-commerce flow can work with product browsing, authentication, cart management, checkout, and order history.
 
-## Stack
+This project is a learning exercise intended to demonstrate frontend routing, state management, and integration with Supabase Auth. The product catalog is loaded from local JSON data, while authentication and backend state are wired through Supabase.
+
+## What this website does
+
+- Shows a landing page with featured categories and product highlights.
+- Lets users view products, filter by category, and search by name.
+- Supports product detail pages with quantity selection.
+- Provides a cart page where users can review items before checkout.
+- Includes login and register pages for signed-in user experience.
+- Offers order tracking, order history, and user profile pages.
+- Uses protected routing so only signed-in users can access checkout and orders.
+
+## How to use it
+
+1. Clone the repository.
+2. Install dependencies with `npm install`.
+3. Create a `.env` file and add Supabase connection keys.
+4. Start the dev server with `npm run dev`.
+5. Open the app in your browser and explore the product pages.
+6. Use the login/register flow to sign in and access protected pages.
+
+## Project stack
 
 - React 19 + Vite
 - React Router v7
 - Tailwind CSS v4
-- Supabase (Postgres) + Clerk (optional frontend auth)
-- react-hot-toast, react-icons
+- Supabase Auth for authentication
+- Local data from `src/data/products.json` and `src/data/categories.json`
+- Reusable UI components in `src/components/`
 
 ## Setup
 
 ```bash
 npm install
 cp .env.example .env
-# Add Supabase keys (VITE_SUPABASE_URL, VITE_SUPABASE_ANON_KEY) and optional Clerk publishable key
+# Add Supabase keys below
 npm run dev
 ```
 
-### Supabase (recommended) and Clerk (optional frontend auth)
+Then edit `.env` with:
 
-1. Create a project at https://app.supabase.com and get `SUPABASE_URL` and `SUPABASE_ANON_KEY`.
-2. Add the keys to your `.env` as `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY`.
-3. (Optional) Create a Clerk application for frontend auth and add `VITE_CLERK_PUBLISHABLE_KEY`.
-4. Create required tables using the migration SQL in `MIGRATE_TO_SUPABASE.md` or via the SQL editor in Supabase.
-5. Create demo users (see `src/data/seedData.js` or use the Supabase Auth panel).
+```env
+VITE_SUPABASE_URL=your-supabase-url
+VITE_SUPABASE_ANON_KEY=your-supabase-anon-key
+```
 
-### Database tables (Supabase / Postgres)
+## Supabase setup (recommended)
 
-| Table         | Primary Key                 | Purpose                                                 |
-| ------------- | --------------------------- | ------------------------------------------------------- |
-| `users`       | `id` (serial) or `clerk_id` | Profile, address, role (sync with Clerk via `clerk_id`) |
-| `carts`       | `id` (serial)               | Cart metadata (user_id, created_at)                     |
-| `cart_items`  | `id` (serial)               | Line items for carts (cart_id, product_id, qty, price)  |
-| `orders`      | `id` (serial)               | Orders & tracking status                                |
-| `order_items` | `id` (serial)               | Line items for orders                                   |
+1. Create a project at https://app.supabase.com.
+2. Copy your `SUPABASE_URL` and `SUPABASE_ANON_KEY`.
+3. Add them to `.env` as `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY`.
+4. Optionally use Supabase Auth to create demo users.
 
-Product catalog is loaded from `src/data/products.json` with prices in **Nigerian Naira (₦)**. Delivery fee is ₦1,500.
+## Notes for students
 
-## Build progress
+- The product catalog is currently static and stored in `src/data/products.json`.
+- Authentication is handled in `src/context/AuthContext.jsx`.
+- Cart state is managed in `src/context/CartContext.jsx`.
+- Pages are located in `src/pages/` and route definitions live in `src/App.jsx`.
+- The app uses `React.lazy` and `Suspense` for route-level code splitting.
 
-- Phase 0 — layout, routing, Firebase contexts
-- Phase 1 — landing page
-- Phase 2 — products listing with search and filters
-- Phases 3–11 — in progress (placeholders)
+## Available scripts
 
-## Scripts
+- `npm run dev` — start the local development server
+- `npm run build` — build the app for production
+- `npm run preview` — preview the production build locally
 
-- `npm run dev` — local dev server
-- `npm run build` — production build
-- `npm run preview` — preview production build
+## Project structure overview
 
-## Brand assets
+- `src/pages/` — page-level route components
+- `src/components/` — reusable shared UI components
+- `src/context/` — app providers for auth and cart state
+- `src/data/` — static product and category data
+- `src/utils/` — helper utilities such as price formatting
 
-- Navbar: `src/assets/oyadeliver_both_textandbird.png`
-- Footer / favicon: `src/assets/Oyadeliver_logo.png` → `public/favicon.png`
-- Loader: `src/assets/oyadeliver-loading.webm`
+## Current status
 
-## Build phases
+This project is in active development. Core navigation and auth flows are available, and the app is being migrated to use Supabase for authentication.
 
-Development follows a page-by-page plan (Phase 0 layout → Phase 11 404). Pause for review after each phase.
+> Note: Some legacy Firebase files remain in the repo, but the app is migrating toward Supabase as the main backend provider.
