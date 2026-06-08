@@ -23,6 +23,7 @@ const RegisterPage = lazy(() => import("./pages/RegisterPage"));
 const UserProfilePage = lazy(() => import("./pages/UserProfilePage"));
 const AdminCatalogPage = lazy(() => import("./pages/admin/AdminCatalogPage"));
 const AdminDashboardPage = lazy(() => import("./pages/admin/AdminDashboardPage"));
+const AdminOrdersPage = lazy(() => import("./pages/admin/AdminOrdersPage"));
 const Error404Page = lazy(() => import("./pages/Error404Page"));
 
 function App() {
@@ -116,7 +117,7 @@ function App() {
               <Route index element={<Navigate to="/admin/catalog" replace />} />
               <Route path="catalog" element={<AdminCatalogPage />} />
               <Route path="dashboard" element={<AdminDashboardPage />} />
-              <Route path="orders" element={<div className="text-oya-teal p-4 font-semibold">Orders Management (Under Construction)</div>} />
+              <Route path="orders" element={<AdminOrdersPage />} />
               <Route path="customers" element={<div className="text-oya-teal p-4 font-semibold">Customers (Under Construction)</div>} />
               <Route path="settings" element={<div className="text-oya-teal p-4 font-semibold">Settings (Under Construction)</div>} />
             </Route>
