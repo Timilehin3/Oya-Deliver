@@ -436,6 +436,18 @@ const AdminCatalogPage = () => {
                       </label>
                     </div>
                   </div>
+
+                  <div className="pt-2">
+                    <label className="flex items-center gap-2 cursor-pointer text-sm font-semibold text-oya-teal hover:text-oya-green">
+                      <input
+                        type="checkbox"
+                        checked={form.featured}
+                        onChange={(e) => setForm({ ...form, featured: e.target.checked })}
+                        className="rounded border-oya-teal/30 text-oya-green focus:ring-oya-green/30"
+                      />
+                      Feature this product on the landing page
+                    </label>
+                  </div>
                 </div>
               </div>
 
