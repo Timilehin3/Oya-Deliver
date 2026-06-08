@@ -18,7 +18,7 @@ const SORT_OPTIONS = [
   { value: 'name-asc', label: 'Name: A–Z' },
 ];
 
-const MAX_PRICE = 20000;
+const MAX_PRICE = 500000;
 const MIN_PRICE = 500;
 
 function filterProducts(products, { search, selectedCategories, maxPrice }) {
